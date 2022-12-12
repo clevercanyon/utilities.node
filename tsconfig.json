@@ -15,12 +15,9 @@
 	 * Customizations
 	 * <custom:start> */
 
-	"compilerOptions" : {
-		"lib"   : [ "es2021" ],
-		"types" : [
-			"vite/client",
-			"@types/node"
-		]
+	"compilerOptions": {
+		"lib": ["es2021"],
+		"types": ["vite/client", "@types/node"]
 	}
 	/** </custom:end> */
 }
