@@ -33,7 +33,7 @@ export default class Glob {
 	 * @see https://github.com/sindresorhus/globby#globbystreampatterns-options
 	 */
 	public static async promise(patterns: string | string[], options: GlobOptions = defaultOptions): Promise<string[]> {
-		return globby(patterns, options);
+		return globby(patterns, { ...defaultOptions, ...options });
 	}
 
 	/**
@@ -47,6 +47,6 @@ export default class Glob {
 	 * @see https://github.com/sindresorhus/globby#globbystreampatterns-options
 	 */
 	public static stream(patterns: string | string[], options: GlobOptions = defaultOptions): NodeJS.ReadableStream {
-		return globbyStream(patterns, options);
+		return globbyStream(patterns, { ...defaultOptions, ...options });
 	}
 }
