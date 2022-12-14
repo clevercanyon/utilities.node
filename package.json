@@ -36,6 +36,7 @@
 	"unpkg": "./dist/index.js",
 	"browser": "",
 	"types": "./dist/types/index.d.ts",
+	"dependencies": {},
 	"peerDependencies": {
 		"globby": "^13.1.3",
 		"ignore": "^5.2.1",
