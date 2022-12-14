@@ -11,13 +11,13 @@
 
 {
 	"extends": "./dev/.files/typescript/config.json",
-	/**
+	/*
 	 * Customizations
 	 * <custom:start> */
 
 	"compilerOptions": {
 		"lib": ["es2021"],
-		"types": ["vite/client", "@types/node"]
+		"types": ["vite/client", "@types/node", "@types/micromatch"]
 	}
-	/** </custom:end> */
+	/* </custom:end> */
 }
