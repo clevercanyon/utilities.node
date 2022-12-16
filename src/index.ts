@@ -2,4 +2,4 @@
  * Utility exports.
  */
 
-export * as $glob from './glob';
+export * as $glob from './glob.js';

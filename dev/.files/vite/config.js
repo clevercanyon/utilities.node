@@ -118,14 +118,14 @@ export default async ({ mode } /* { command, mode, ssrBuild } */, projConfig = {
 	/**
 	 * Updates `package.json` accordingly.
 	 */
-	pkg.exports = pkg.exports || {}; // Ensure exists.
-	pkg.exports = Array.isArray(pkg.exports) ? {} : pkg.exports;
+	pkg.exports = {}; // Ensure exists as object.
 
 	if (isCma && (isSSR || cmaEntriesSubPathsNoExt.length > 1)) {
 		mc.patch(pkg.exports, {
 			'.': {
 				import: './dist/' + cmaEntryIndexSubPathNoExt + '.js',
 				require: './dist/' + cmaEntryIndexSubPathNoExt + '.cjs',
+				types: './dist/types/' + cmaEntryIndexSubPathNoExt + '.d.ts',
 			},
 		});
 		pkg.module = './dist/' + cmaEntryIndexSubPathNoExt + '.js';
@@ -145,6 +145,7 @@ export default async ({ mode } /* { command, mode, ssrBuild } */, projConfig = {
 				['./' + cmaEntrySubPathNoExt]: {
 					import: './dist/' + cmaEntrySubPathNoExt + '.js',
 					require: './dist/' + cmaEntrySubPathNoExt + '.cjs',
+					types: './dist/types/' + cmaEntrySubPathNoExt + '.d.ts',
 				},
 			});
 		}
@@ -153,6 +154,7 @@ export default async ({ mode } /* { command, mode, ssrBuild } */, projConfig = {
 			'.': {
 				import: './dist/' + cmaEntryIndexSubPathNoExt + '.js',
 				require: './dist/' + cmaEntryIndexSubPathNoExt + '.umd.cjs',
+				types: './dist/types/' + cmaEntryIndexSubPathNoExt + '.d.ts',
 			},
 		});
 		pkg.module = './dist/' + cmaEntryIndexSubPathNoExt + '.js';
@@ -165,6 +167,7 @@ export default async ({ mode } /* { command, mode, ssrBuild } */, projConfig = {
 		pkg.typesVersions = { '>=3.1': { './*': ['./dist/types/*'] } };
 	} else {
 		(pkg.exports = []), (pkg.typesVersions = {});
+		// ↑ When empty, `exports` should default to an array.
 		pkg.module = pkg.main = pkg.browser = pkg.unpkg = pkg.types = '';
 	}
 	await fsp.writeFile(pkgFile, prettier.format(JSON.stringify(pkg, null, 4), pkgPrettierCfg));
