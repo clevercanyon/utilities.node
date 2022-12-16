@@ -8,34 +8,38 @@
 	"homepage": "https://github.com/clevercanyon/utilities.node#readme",
 	"bugs": "https://github.com/clevercanyon/utilities.node/issues",
 	"funding": "https://github.com/sponsors/clevercanyon",
-	"keywords": [
-		"clevercanyon"
-	],
+	"keywords": ["clevercanyon"],
 	"author": {
 		"name": "Clever Canyon",
 		"url": "https://clevercanyon.com"
 	},
 	"contributors": [],
 	"type": "module",
-	"files": [
-		"/dist"
-	],
+	"files": ["/dist"],
 	"bin": {},
 	"imports": {},
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
+		},
+		"./glob": {
+			"import": "./dist/glob.js",
+			"require": "./dist/glob.cjs"
 		}
 	},
-	"sideEffects": [
-		"./src/*.{html,scss,css,tsx,ts,jsx,mjs,js}"
-	],
+	"sideEffects": ["./src/*.{html,scss,css,tsx,ts,jsx,mjs,js}"],
 	"module": "./dist/index.js",
 	"main": "./dist/index.cjs",
-	"unpkg": "./dist/index.js",
 	"browser": "",
+	"unpkg": "./dist/index.js",
 	"types": "./dist/types/index.d.ts",
+	"typesVersions": {
+		">=3.1": {
+			"./*": ["./dist/types/*"]
+		}
+	},
+	"dependencies": {},
 	"peerDependencies": {
 		"@clevercanyon/utilities": "^1.0.19",
 		"globby": "^13.1.3",
@@ -50,14 +54,8 @@
 		"@types/node": "^18.11.9"
 	},
 	"overrides": {},
-	"cpu": [
-		"x64",
-		"arm64"
-	],
-	"os": [
-		"darwin",
-		"linux"
-	],
+	"cpu": ["x64", "arm64"],
+	"os": ["darwin", "linux"],
 	"engines": {
 		"node": "^19.2.0",
 		"npm": "^8.19.3"

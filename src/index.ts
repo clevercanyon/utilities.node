@@ -2,4 +2,4 @@
  * Utility exports.
  */
 
-export { default as Glob } from './Glob';
+export * as $glob from './glob';
