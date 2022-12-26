@@ -2,8 +2,8 @@
  * Utility class.
  */
 
-import type { Options as GlobbyOptions } from 'globby';
 import { globby, globbyStream } from 'globby';
+import type { Options as GlobbyOptions } from 'globby';
 
 /**
  * Glob options.
