@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.32",
+	"version": "1.0.33",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Another great project by Clever Canyon.",
@@ -44,27 +44,29 @@
 			"./*": ["./dist/types/*"]
 		}
 	},
+	"dependencies": {},
 	"peerDependencies": {
-		"@clevercanyon/utilities": "^1.0.77",
+		"@clevercanyon/utilities": "^1.0.78",
 		"globby": "^13.1.3",
 		"ignore": "^5.2.4",
-		"micromatch": "npm:@clevercanyon/micromatch.fork@^4.0.10"
+		"micromatch": "npm:@clevercanyon/micromatch.fork@^4.0.15"
 	},
 	"peerDependenciesMeta": {},
+	"optionalDependencies": {},
 	"bundleDependencies": [],
 	"devDependencies": {
-		"@clevercanyon/skeleton-dev-deps": "^1.0.87",
+		"@clevercanyon/skeleton-dev-deps": "^1.0.99",
 		"@types/micromatch": "^4.0.2",
 		"@types/node": "^18.11.18"
 	},
 	"overrides": {},
+	"workspaces": [],
 	"cpu": ["x64", "arm64"],
 	"os": ["darwin", "linux"],
 	"engines": {
 		"node": "^19.2.0 || ^19.4.0",
 		"npm": "^8.19.3 || ^9.2.0"
 	},
-	"workspaces": [],
 	"config": {
 		"c10n": {
 			"&": {
@@ -81,7 +83,8 @@
 						"architects": "push"
 					},
 					"labels": {},
-					"configVersion": "1.0.1"
+					"configVersion": "1.0.1",
+					"envsVersion": ""
 				},
 				"npmjs": {
 					"configVersions": "1.0.1,1.0.0"
