@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.37",
+	"version": "1.0.38",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Utilities for JavaScript apps running in a Node environment.",
@@ -46,16 +46,16 @@
 	},
 	"dependencies": {},
 	"peerDependencies": {
-		"@clevercanyon/utilities": "^1.0.82",
+		"@clevercanyon/utilities": "^1.0.83",
 		"globby": "^13.1.3",
 		"ignore": "^5.2.4",
-		"micromatch": "npm:@clevercanyon/micromatch.fork@^4.0.18"
+		"micromatch": "npm:@clevercanyon/micromatch.fork@^4.0.19"
 	},
 	"peerDependenciesMeta": {},
 	"optionalDependencies": {},
 	"bundleDependencies": [],
 	"devDependencies": {
-		"@clevercanyon/skeleton-dev-deps": "^1.0.102",
+		"@clevercanyon/skeleton-dev-deps": "^1.0.103",
 		"@types/micromatch": "^4.0.2",
 		"@types/node": "^18.11.18"
 	},
@@ -83,11 +83,11 @@
 						"architects": "push"
 					},
 					"labels": {},
-					"configVersion": "1.0.1",
+					"configVersion": "1.0.2",
 					"envsVersion": ""
 				},
 				"npmjs": {
-					"configVersions": "1.0.1,1.0.0"
+					"configVersions": "1.0.2,1.0.2"
 				}
 			}
 		}
