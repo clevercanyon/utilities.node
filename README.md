@@ -1,3 +1,3 @@
 # @clevercanyon/utilities.node
 
-Another great project by Clever Canyon.
+Utilities for JavaScript apps running in a Node environment.
