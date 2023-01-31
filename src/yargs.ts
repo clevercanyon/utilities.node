@@ -4,7 +4,9 @@
 
 import yArgs from 'yargs';
 import { hideBin as yArgsꓺhideBin } from 'yargs/helpers';
-import type { Argv as Yargs, Arguments as yargsꓺArgs } from 'yargs';
+
+import type { Argv as Yargs, Arguments as yArgsꓺArgs } from 'yargs';
+export type { Argv as Yargs, Arguments as yArgsꓺArgs } from 'yargs';
 
 import chalk from 'chalk'; // + `$chalk` utilities.
 import { errorBox as $chalkꓺerrorBox } from './chalk.js';
@@ -128,7 +130,7 @@ const yArgsꓺwithBracketedArrays = async (): Promise<Yargs> => {
 			},
 		})
 		.middleware((args) => {
-			const partialArgs: Partial<yargsꓺArgs> = args;
+			const partialArgs: Partial<yArgsꓺArgs> = args;
 			delete partialArgs[']']; // Ditch closing brackets.
 
 			for (const [name] of Object.entries(args)) {

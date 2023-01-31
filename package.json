@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.39",
+	"version": "1.0.40",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Utilities for JavaScript apps running in a Node environment.",
