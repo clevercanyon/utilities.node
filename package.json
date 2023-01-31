@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.38",
+	"version": "1.0.39",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Utilities for JavaScript apps running in a Node environment.",
@@ -31,6 +31,21 @@
 			"import": "./dist/glob.js",
 			"require": "./dist/glob.cjs",
 			"types": "./dist/types/glob.d.ts"
+		},
+		"./chalk": {
+			"import": "./dist/chalk.js",
+			"require": "./dist/chalk.cjs",
+			"types": "./dist/types/chalk.d.ts"
+		},
+		"./cmd": {
+			"import": "./dist/cmd.js",
+			"require": "./dist/cmd.cjs",
+			"types": "./dist/types/cmd.d.ts"
+		},
+		"./yargs": {
+			"import": "./dist/yargs.js",
+			"require": "./dist/yargs.cjs",
+			"types": "./dist/types/yargs.d.ts"
 		}
 	},
 	"sideEffects": ["./src/*.{html,scss,ts,tsx}"],
@@ -47,9 +62,16 @@
 	"dependencies": {},
 	"peerDependencies": {
 		"@clevercanyon/utilities": "^1.0.83",
+		"boxen": "^7.0.1",
+		"chalk": "^5.2.0",
 		"globby": "^13.1.3",
 		"ignore": "^5.2.4",
-		"micromatch": "npm:@clevercanyon/micromatch.fork@^4.0.19"
+		"lodash": "^4.17.21",
+		"micromatch": "npm:@clevercanyon/micromatch.fork@^4.0.19",
+		"shescape": "npm:@clevercanyon/shescape.fork@^1.6.11",
+		"spawn-please": "npm:@clevercanyon/spawn-please.fork@^2.0.11",
+		"yargs": "^17.6.2",
+		"yargs-parser": "^21.1.1"
 	},
 	"peerDependenciesMeta": {},
 	"optionalDependencies": {},
