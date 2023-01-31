@@ -50,6 +50,11 @@ const defaultExecOptions: ExecOptions = {
 };
 
 /**
+ * Shell escape utilities.
+ */
+export const { escape: esc, escapeAll: escAll, quote, quoteAll } = se;
+
+/**
  * Spawns command line operation.
  *
  * - CMD + any args are quoted automatically by this function.
