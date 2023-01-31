@@ -8,7 +8,7 @@ import type { Options as GlobbyOptions } from 'globby';
 /**
  * Glob options.
  */
-interface Options extends GlobbyOptions {}
+export interface Options extends GlobbyOptions {}
 
 /**
  * Default glob options.
