@@ -5,12 +5,14 @@
 import _ꓺomit from 'lodash/omit.js';
 import _ꓺdefaults from 'lodash/defaults.js';
 
-import * as se from 'shescape';
 import spawnPlease from 'spawn-please';
 import { execSync } from 'node:child_process';
 
 import chalk from 'chalk';
 import type { ChalkInstance } from 'chalk';
+
+import * as shEscape from 'shescape';
+import * as splitCMD from '@clevercanyon/split-cmd.fork';
 
 const stdout = process.stdout.write.bind(process.stdout);
 const stderr = process.stderr.write.bind(process.stderr);
@@ -50,9 +52,14 @@ const defaultExecOptions: ExecOptions = {
 };
 
 /**
+ * Split CMD utilities.
+ */
+export const { splitCMD: split } = splitCMD;
+
+/**
  * Shell escape utilities.
  */
-export const { escape: esc, escapeAll: escAll, quote, quoteAll } = se;
+export const { escape: esc, escapeAll: escAll, quote, quoteAll } = shEscape;
 
 /**
  * Spawns command line operation.
@@ -76,7 +83,7 @@ export const spawn = async (cmd: string, args: string[] = [], options: SpawnOpti
 	if ('shell' in opts ? opts.shell : 'bash') {
 		// When using a shell, we must escape everything ourselves.
 		// i.e., Node does not escape `cmd` or `args` when a `shell` is given.
-		(cmd = se.quote(cmd)), (args = se.quoteAll(args));
+		(cmd = quote(cmd)), (args = quoteAll(args));
 	}
 	return await spawnPlease(cmd, args, {
 		shell: 'bash',
