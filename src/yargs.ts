@@ -4,14 +4,14 @@
 
 import yArgs from 'yargs';
 import { hideBin as yArgsꓺhideBin } from 'yargs/helpers';
-
-import type { Argv as Yargs, Arguments as yArgsꓺArgs } from 'yargs';
-export type { Argv as Yargs, Arguments as yArgsꓺArgs } from 'yargs';
+import type { Argv as Yargs, Arguments as Args } from 'yargs';
 
 import chalk from 'chalk'; // + `$chalk` utilities.
 import { errorBox as $chalkꓺerrorBox } from './chalk.js';
 
 import _ꓺdefaults from 'lodash/defaults.js';
+
+export type { Argv as Yargs, Arguments as Args } from 'yargs';
 
 /**
  * {@see yargs()} options.
@@ -44,13 +44,13 @@ const defaultOptions: Options = {
 };
 
 /**
- * Creates a new Yargs instance.
+ * Creates a new Yargs CLI instance.
  *
  * @param   options Instance creation options.
  *
- * @returns         A new pre-configured Yargs instance.
+ * @returns         A new pre-configured Yargs CLI instance.
  */
-export const yargs = async (options: Options = defaultOptions): Promise<Yargs> => {
+export const cli = async (options: Options = defaultOptions): Promise<Yargs> => {
 	let newYargs: Yargs; // Initialize Yargs instance var.
 	const opts = _ꓺdefaults({}, options, defaultOptions) as Required<Options>;
 
@@ -130,7 +130,7 @@ const yArgsꓺwithBracketedArrays = async (): Promise<Yargs> => {
 			},
 		})
 		.middleware((args) => {
-			const partialArgs: Partial<yArgsꓺArgs> = args;
+			const partialArgs: Partial<Args> = args;
 			delete partialArgs[']']; // Ditch closing brackets.
 
 			for (const [name] of Object.entries(args)) {
