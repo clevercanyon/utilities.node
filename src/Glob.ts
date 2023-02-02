@@ -28,7 +28,7 @@ const defaultOptions: Options = {
  *
  * @see https://github.com/sindresorhus/globby#globbystreampatterns-options
  */
-export async function promise(patterns: string | string[], options: Options = defaultOptions): Promise<string[]> {
+export async function promise(patterns: string | string[], options: Options = defaultOptions): Promise<ReturnType<typeof globby>> {
 	return globby(patterns, { ...defaultOptions, ...options });
 }
 
@@ -42,6 +42,6 @@ export async function promise(patterns: string | string[], options: Options = de
  *
  * @see https://github.com/sindresorhus/globby#globbystreampatterns-options
  */
-export function stream(patterns: string | string[], options: Options = defaultOptions): NodeJS.ReadableStream {
+export function stream(patterns: string | string[], options: Options = defaultOptions): ReturnType<typeof globbyStream> {
 	return globbyStream(patterns, { ...defaultOptions, ...options });
 }
