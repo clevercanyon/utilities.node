@@ -9,7 +9,6 @@
  */
 
 declare const $$__APP_PKG_NAME__$$: string;
-declare const $$__APP_PKG_OBP__$$: string;
 declare const $$__APP_PKG_VERSION__$$: string;
 declare const $$__APP_PKG_REPOSITORY__$$: string;
 declare const $$__APP_PKG_HOMEPAGE__$$: string;
