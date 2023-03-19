@@ -23,17 +23,10 @@ import { ViteMinifyPlugin as pluginMinifyHTML } from 'vite-plugin-minify';
 import u from '../bin/includes/utilities.mjs';
 import importAliases from './includes/import-aliases.mjs';
 import { $str, $obj, $obp } from '../../../node_modules/@clevercanyon/utilities/dist/index.js';
-import { $glob } from '../../../node_modules/@clevercanyon/utilities.node/dist/index.js';
+import { $path, $glob } from '../../../node_modules/@clevercanyon/utilities.node/dist/index.js';
 
-import desm from 'desm';
-import archiver from 'archiver';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-
-const $path = {
-	archiver: archiver,
-	imuDirname: desm,
-};
 
 /**
  * Defines Vite configuration.

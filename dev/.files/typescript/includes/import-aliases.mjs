@@ -13,11 +13,8 @@
 /* eslint-env es2021, node */
 
 import path from 'node:path';
+import { $path } from '../../../../node_modules/@clevercanyon/utilities.node/dist/index.js';
 
-import desm from 'desm';
-const $path = {
-	imuDirname: desm,
-};
 const __dirname = $path.imuDirname(import.meta.url);
 const projDir = path.resolve(__dirname, '../../../..');
 const srcDir = path.resolve(projDir, './src');

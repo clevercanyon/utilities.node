@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.55",
+	"version": "1.0.56",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Utilities for JavaScript apps running in a Node environment.",
@@ -11,9 +11,7 @@
 	"homepage": "https://github.com/clevercanyon/utilities.node#readme",
 	"bugs": "https://github.com/clevercanyon/utilities.node/issues",
 	"funding": "https://github.com/sponsors/clevercanyon",
-	"keywords": [
-		"clevercanyon"
-	],
+	"keywords": ["clevercanyon"],
 	"author": {
 		"name": "Clever Canyon",
 		"url": "https://clevercanyon.com"
@@ -64,9 +62,7 @@
 			"types": "./dist/types/prettier.d.ts"
 		}
 	},
-	"sideEffects": [
-		"./src/*.{html,scss,ts,tsx}"
-	],
+	"sideEffects": ["./src/*.{html,scss,ts,tsx}"],
 	"module": "./dist/index.js",
 	"main": "./dist/index.cjs",
 	"browser": "",
@@ -74,17 +70,15 @@
 	"types": "./dist/types/index.d.ts",
 	"typesVersions": {
 		">=3.1": {
-			"./*": [
-				"./dist/types/*"
-			]
+			"./*": ["./dist/types/*"]
 		}
 	},
 	"dependencies": {},
 	"peerDependencies": {
 		"@clevercanyon/split-cmd.fork": "^1.0.27",
-		"@clevercanyon/utilities": "^1.0.98",
+		"@clevercanyon/utilities": "^1.0.99",
 		"archiver": "^5.3.1",
-		"boxen": "^7.0.1",
+		"boxen": "^7.0.2",
 		"chalk": "^5.2.0",
 		"dotenv": "^16.0.3",
 		"dotenv-vault": "^1.18.0",
@@ -95,28 +89,22 @@
 		"shescape": "npm:@clevercanyon/shescape.fork@^1.6.21",
 		"spawn-please": "npm:@clevercanyon/spawn-please.fork@^2.0.21",
 		"term-img": "^6.0.0",
-		"yargs": "^17.6.2",
+		"yargs": "^17.7.1",
 		"yargs-parser": "^21.1.1"
 	},
 	"peerDependenciesMeta": {},
 	"optionalDependencies": {},
 	"bundleDependencies": [],
 	"devDependencies": {
-		"@clevercanyon/skeleton-dev-deps": "^1.0.121",
+		"@clevercanyon/skeleton-dev-deps": "^1.0.127",
 		"@types/archiver": "^5.3.2",
-		"@types/node": "^18.11.19",
+		"@types/node": "^18.15.3",
 		"@types/yargs": "^17.0.22",
 		"@types/yargs-parser": "^21.0.0"
 	},
 	"overrides": {},
-	"cpu": [
-		"x64",
-		"arm64"
-	],
-	"os": [
-		"darwin",
-		"linux"
-	],
+	"cpu": ["x64", "arm64"],
+	"os": ["darwin", "linux"],
 	"engines": {
 		"node": "^19.2.0 || ^19.4.0",
 		"npm": "^8.19.3 || ^9.2.0"
@@ -137,11 +125,11 @@
 						"architects": "push"
 					},
 					"labels": {},
-					"configVersion": "1.0.2",
+					"configVersion": "1.0.3",
 					"envsVersion": ""
 				},
 				"npmjs": {
-					"configVersions": "1.0.2,1.0.2"
+					"configVersions": "1.0.3,1.0.3"
 				}
 			}
 		}
