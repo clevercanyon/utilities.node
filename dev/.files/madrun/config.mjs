@@ -8,8 +8,6 @@
  */
 /* eslint-env es2021, node */
 
-import events from './includes/events.mjs';
-
 /**
  * `$ madrun` commands.
  */
@@ -23,9 +21,11 @@ export default async (/* {cmd, args, ctx} */) => {
 		'preview': async ({ args }) => 'npx vite preview' + (args.mode ? '' : ' --mode=dev') + ' {{@}}',
 		'build': async ({ args }) => 'npx vite build' + (args.mode ? '' : ' --mode=prod') + ' {{@}}',
 
-		'jest': 'npx jest {{@}}', // Runs project Jest tests.
-		'wrangler': 'CLOUDFLARE_API_TOKEN="${USER_CLOUDFLARE_TOKEN:-}" npx wrangler {{@}}',
+		'tests': async ({ args }) => 'npx vitest' + (args.mode ? '' : ' --mode=dev') + ' {{@}}',
+		'tests:ui': async ({ args }) => 'npx vitest --watch --ui' + (args.mode ? '' : ' --mode=dev') + ' {{@}}',
 
-		...events, // e.g., `on::madrun:default:new`.
+		'jest': 'npx jest {{@}}', // Runs project Jest tests.
+		'vitest': async ({ args }) => 'npx vitest' + (args.mode ? '' : ' --mode=dev') + ' {{@}}',
+		'wrangler': 'CLOUDFLARE_API_TOKEN="${USER_CLOUDFLARE_TOKEN:-}" npx wrangler {{@}}',
 	};
 };

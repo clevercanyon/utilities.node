@@ -17,7 +17,7 @@ import baseConfig from './dev/.files/madrun/config.mjs';
  * <custom:start> */
 
 export default async (madrun) => {
-	return $obj.mc.merge({}, await baseConfig(madrun), {
+	return $obj.mergeDeep({}, await baseConfig(madrun), {
 		// 'project:[cmd]': '', // Always prefix project CMDs.
 	});
 };

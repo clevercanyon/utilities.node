@@ -17,7 +17,7 @@
 
 	"compilerOptions": {
 		"lib": ["es2021"],
-		"types": ["vite/client", "@types/node", "@types/lodash", "@types/yargs", "@types/yargs-parser"]
+		"types": ["vite/client", "@types/archiver", "@types/node", "@types/yargs", "@types/yargs-parser"]
 	}
 	/* </custom:end> */
 }

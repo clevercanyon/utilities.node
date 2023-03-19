@@ -16,6 +16,6 @@ const baseConfig = require('./dev/.files/prettier/config.cjs');
  * Customizations.
  * <custom:start> */
 
-module.exports = $obj.mc.merge({}, baseConfig, {});
+module.exports = $obj.mergeDeep({}, baseConfig, {});
 
 /* </custom:end> */

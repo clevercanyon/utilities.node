@@ -2,54 +2,25 @@
  * Utility class.
  */
 
-import _ꓺomit from 'lodash/omit.js';
-import _ꓺdefaults from 'lodash/defaults.js';
-
 import spawnPlease from 'spawn-please';
 import { execSync } from 'node:child_process';
 
-import chalk from 'chalk';
-import type { ChalkInstance } from 'chalk';
+import * as $chalk from './chalk.js';
+import { $obj } from '@clevercanyon/utilities';
 
 import * as shEscape from 'shescape';
 import * as splitCMD from '@clevercanyon/split-cmd.fork';
+
+import type { Chalk } from './chalk.js';
 
 const stdout = process.stdout.write.bind(process.stdout);
 const stderr = process.stderr.write.bind(process.stderr);
 
 /**
- * {@see spawn()} options.
+ * Defines types.
  */
-export interface SpawnOptions {
-	quiet?: boolean;
-	stdoutChalk?: ChalkInstance;
-	stderrChalk?: ChalkInstance;
-	[x: string]: unknown;
-}
-
-/**
- * {@see exec()} options.
- */
-export interface ExecOptions {
-	quiet?: boolean;
-	[x: string]: unknown;
-}
-
-/**
- * Default {@see spawn()} options.
- */
-const defaultSpawnOptions: SpawnOptions = {
-	quiet: false,
-	stdoutChalk: chalk.white,
-	stderrChalk: chalk.gray,
-};
-
-/**
- * Default {@see exec()} options.
- */
-const defaultExecOptions: ExecOptions = {
-	quiet: false,
-};
+export type SpawnOptions = { quiet?: boolean; stdoutChalk?: Chalk; stderrChalk?: Chalk; [x: string]: unknown };
+export type ExecOptions = { quiet?: boolean; [x: string]: unknown };
 
 /**
  * Split CMD utilities.
@@ -77,8 +48,8 @@ export const { escape: esc, escapeAll: escAll, quote, quoteAll } = shEscape;
  *   - Stdout when `stdio: 'pipe'`; i.e., pipe to this function.
  *   - Stdout when `quiet: true`, which also implies `stdio: 'pipe'`.
  */
-export const spawn = async (cmd: string, args: string[] = [], options: SpawnOptions = defaultSpawnOptions): Promise<string> => {
-	const opts = _ꓺdefaults({}, options, defaultSpawnOptions) as Required<SpawnOptions>;
+export const spawn = async (cmd: string, args: string[] = [], options?: SpawnOptions): Promise<string> => {
+	const opts = $obj.defaults({}, options || {}, { quiet: false, stdoutChalk: $chalk.white, stderrChalk: $chalk.gray }) as Required<SpawnOptions>;
 
 	if ('shell' in opts ? opts.shell : 'bash') {
 		// When using a shell, we must escape everything ourselves.
@@ -96,7 +67,7 @@ export const spawn = async (cmd: string, args: string[] = [], options: SpawnOpti
 		stdout: opts.quiet ? null : (buffer: Buffer) => stdout(opts.stdoutChalk(buffer.toString())),
 		stderr: opts.quiet ? null : (buffer: Buffer) => stderr(opts.stderrChalk(buffer.toString())),
 
-		..._ꓺomit(opts, ['quiet', 'stdoutChalk', 'stderrChalk']),
+		...$obj.omit(opts, ['quiet', 'stdoutChalk', 'stderrChalk']),
 	});
 };
 
@@ -115,8 +86,8 @@ export const spawn = async (cmd: string, args: string[] = [], options: SpawnOpti
  *   - Stdout when `stdio: 'pipe'`; i.e., pipe to this function.
  *   - Stdout when `quiet: true`, which also implies `stdio: 'pipe'`.
  */
-export const exec = async (cmd: string, options: ExecOptions = defaultExecOptions): Promise<string> => {
-	const opts = _ꓺdefaults({}, options, defaultExecOptions) as Required<ExecOptions>;
+export const exec = async (cmd: string, options?: ExecOptions): Promise<string> => {
+	const opts = $obj.defaults({}, options || {}, { quiet: false }) as Required<ExecOptions>;
 
 	return (
 		execSync(cmd, {
@@ -127,7 +98,7 @@ export const exec = async (cmd: string, options: ExecOptions = defaultExecOption
 			stdio: opts.quiet ? 'pipe' : 'inherit',
 			// `execSync` does not support output handlers.
 
-			..._ꓺomit(opts, ['quiet']),
+			...$obj.omit(opts, ['quiet']),
 		}) || Buffer.from('')
 	).toString();
 };

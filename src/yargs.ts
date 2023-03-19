@@ -4,17 +4,12 @@
 
 import yArgs from 'yargs';
 import { hideBin as yArgsꓺhideBin } from 'yargs/helpers';
-import type { Argv as Yargs, Arguments as Args } from 'yargs';
 
-import chalk from 'chalk'; // + `$chalk` utilities.
-import { errorBox as $chalkꓺerrorBox } from './chalk.js';
-
-import _ꓺdefaults from 'lodash/defaults.js';
-
-export type { Argv as Yargs, Arguments as Args } from 'yargs';
+import * as $chalk from './chalk.js';
+import { $is, $obj } from '@clevercanyon/utilities';
 
 /**
- * {@see yargs()} options.
+ * Defines types.
  */
 export interface Options {
 	bracketedArrays?: boolean;
@@ -27,21 +22,8 @@ export interface Options {
 	showHidden?: boolean;
 	strict?: boolean;
 }
-
-/**
- * Default {@see yargs()} options.
- */
-const defaultOptions: Options = {
-	bracketedArrays: true,
-	scriptName: '',
-	errorBoxName: '',
-	helpOption: 'help',
-	versionOption: 'version',
-	version: '0.0.0',
-	maxTerminalWidth: 80,
-	showHidden: false,
-	strict: true,
-};
+import type { Argv as Yargs, Arguments as Args } from 'yargs';
+export type { Argv as Yargs, Arguments as Args } from 'yargs';
 
 /**
  * Creates a new Yargs CLI instance.
@@ -50,9 +32,20 @@ const defaultOptions: Options = {
  *
  * @returns         A new pre-configured Yargs CLI instance.
  */
-export const cli = async (options: Options = defaultOptions): Promise<Yargs> => {
+export const cli = async (options?: Options): Promise<Yargs> => {
 	let newYargs: Yargs; // Initialize Yargs instance var.
-	const opts = _ꓺdefaults({}, options, defaultOptions) as Required<Options>;
+
+	const opts = $obj.defaults({}, options || {}, {
+		bracketedArrays: true,
+		scriptName: '',
+		errorBoxName: '',
+		helpOption: 'help',
+		versionOption: 'version',
+		version: '0.0.0',
+		maxTerminalWidth: 80,
+		showHidden: false,
+		strict: true,
+	}) as Required<Options>;
 
 	if (opts.bracketedArrays) {
 		newYargs = await yArgsꓺwithBracketedArrays();
@@ -78,13 +71,13 @@ export const cli = async (options: Options = defaultOptions): Promise<Yargs> => 
 		.strict(opts.strict) // `true` = no arbitrary commands|options.
 
 		.fail(async (message, error /* , yargs */) => {
-			if (error && error.stack && typeof error.stack === 'string') {
-				console.error(chalk.gray(error.stack));
+			if ($is.error(error) && error.stack && $is.string(error.stack)) {
+				console.error($chalk.gray(error.stack));
 			}
 			const errorBoxTitle = (opts.errorBoxName ? opts.errorBoxName + ': ' : '') + 'Problem';
-			const errorBoxMessage = error ? error.toString() : message || 'Unexpected unknown errror.';
+			const errorBoxMessage = $is.error(error) ? error.toString() : message || 'Unexpected unknown errror.';
 
-			console.error($chalkꓺerrorBox(errorBoxTitle, errorBoxMessage));
+			console.error($chalk.errorBox(errorBoxTitle, errorBoxMessage));
 			process.exit(1); // Stop here.
 		});
 };
@@ -139,8 +132,8 @@ const yArgsꓺwithBracketedArrays = async (): Promise<Yargs> => {
 				} else if (!bracketedArrayArgNames.includes(name)) {
 					continue; // Not applicable.
 				}
-				if (args[name] instanceof Array) {
-					args[name] = (args[name] as Array<string | number>) //
+				if ($is.array(args[name])) {
+					args[name] = (args[name] as (string | number)[]) //
 						.map((v) => (typeof v === 'string' ? v.replace(/,$/u, '') : v))
 						.filter((v) => '' !== v);
 				}

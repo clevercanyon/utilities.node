@@ -3,20 +3,14 @@
  */
 
 import { globby, globbyStream } from 'globby';
+import { $obj } from '@clevercanyon/utilities';
+
 import type { Options as GlobbyOptions } from 'globby';
 
 /**
  * Glob options.
  */
 export interface Options extends GlobbyOptions {}
-
-/**
- * Default glob options.
- */
-const defaultOptions: Options = {
-	expandDirectories: false,
-	absolute: true,
-};
 
 /**
  * Globby promise.
@@ -28,9 +22,9 @@ const defaultOptions: Options = {
  *
  * @see https://github.com/sindresorhus/globby#globbystreampatterns-options
  */
-export async function promise(patterns: string | string[], options: Options = defaultOptions): Promise<ReturnType<typeof globby>> {
-	return globby(patterns, { ...defaultOptions, ...options });
-}
+export const promise = async (patterns: string | string[], options?: Options): Promise<ReturnType<typeof globby>> => {
+	return globby(patterns, $obj.defaults({}, options || {}, { expandDirectories: false, absolute: true }) as Required<Options>);
+};
 
 /**
  * Globby stream.
@@ -42,6 +36,6 @@ export async function promise(patterns: string | string[], options: Options = de
  *
  * @see https://github.com/sindresorhus/globby#globbystreampatterns-options
  */
-export function stream(patterns: string | string[], options: Options = defaultOptions): ReturnType<typeof globbyStream> {
-	return globbyStream(patterns, { ...defaultOptions, ...options });
-}
+export const stream = (patterns: string | string[], options?: Options): ReturnType<typeof globbyStream> => {
+	return globbyStream(patterns, $obj.defaults({}, options || {}, { expandDirectories: false, absolute: true }) as Required<Options>);
+};
