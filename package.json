@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.60",
+	"version": "1.0.61",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Utilities for JavaScript apps running in a Node environment.",
@@ -60,6 +60,11 @@
 			"import": "./dist/prettier.js",
 			"require": "./dist/prettier.cjs",
 			"types": "./dist/types/prettier.d.ts"
+		},
+		"./fs": {
+			"import": "./dist/fs.js",
+			"require": "./dist/fs.cjs",
+			"types": "./dist/types/fs.d.ts"
 		}
 	},
 	"sideEffects": ["./src/*.{html,scss,ts,tsx}"],
