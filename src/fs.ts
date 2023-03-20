@@ -2,6 +2,8 @@
  * Utility class.
  */
 
+import './resources/init-env.js';
+
 import url from 'node:url';
 import path from 'node:path';
 

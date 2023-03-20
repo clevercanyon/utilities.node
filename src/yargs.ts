@@ -2,6 +2,8 @@
  * Utility class.
  */
 
+import './resources/init-env.js';
+
 import yArgs from 'yargs';
 import { hideBin as yArgsꓺhideBin } from 'yargs/helpers';
 

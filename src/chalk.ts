@@ -2,6 +2,8 @@
  * Utility class.
  */
 
+import './resources/init-env.js';
+
 import coloredBox from 'boxen';
 import termImage from 'term-img';
 import chalk, { supportsColor } from 'chalk';
@@ -18,19 +20,60 @@ export type { ChalkInstance as Chalk } from 'chalk';
  * Export chalk utilities.
  */
 export { chalk as $, supportsColor };
+
 export const { hex, bgHex, rgb, bgRgb, ansi256, bgAnsi256 } = chalk;
 export const { reset, bold, dim, italic, underline, overline, inverse, hidden, strikethrough, visible } = chalk;
-export const { black, red, green, yellow, blue, magenta, cyan, white, blackBright, gray, grey, redBright, greenBright, yellowBright, blueBright, magentaBright, cyanBright, whiteBright } = chalk;
-export const { bgBlack, bgRed, bgGreen, bgYellow, bgBlue, bgMagenta, bgCyan, bgWhite, bgBlackBright, bgGray, bgGrey, bgRedBright, bgGreenBright, bgYellowBright, bgBlueBright, bgMagentaBright, bgCyanBright, bgWhiteBright } = chalk;
+
+export const {
+	black,
+	red,
+	green,
+	yellow,
+	blue,
+	magenta,
+	cyan,
+	white,
+	blackBright,
+	gray,
+	grey,
+	redBright,
+	greenBright,
+	yellowBright,
+	blueBright,
+	magentaBright,
+	cyanBright,
+	whiteBright,
+} = chalk;
+
+export const {
+	bgBlack,
+	bgRed,
+	bgGreen,
+	bgYellow,
+	bgBlue,
+	bgMagenta,
+	bgCyan,
+	bgWhite,
+	bgBlackBright,
+	bgGray,
+	bgGrey,
+	bgRedBright,
+	bgGreenBright,
+	bgYellowBright,
+	bgBlueBright,
+	bgMagentaBright,
+	bgCyanBright,
+	bgWhiteBright,
+} = chalk;
 
 /**
  * Outputs CLI error box.
  *
- * @param   title Output title.
- * @param   text  Output text.
- * @param   options  Options (all optional).
+ * @param   title   Output title.
+ * @param   text    Output text.
+ * @param   options Options (all optional).
  *
- * @returns       Output error string.
+ * @returns         Output error string.
  */
 export const errorBox = (title: string, text: string, options?: ErrorBoxOptions): string => {
 	const opts = $obj.defaults({}, options || {}, { image: '' }) as Required<ErrorBoxOptions>;
@@ -60,11 +103,11 @@ export const errorBox = (title: string, text: string, options?: ErrorBoxOptions)
 /**
  * Outputs CLI finale box.
  *
- * @param   title Output title.
- * @param   text  Output text.
- * @param   options  Options (all optional).
+ * @param   title   Output title.
+ * @param   text    Output text.
+ * @param   options Options (all optional).
  *
- * @returns       Output finale string.
+ * @returns         Output finale string.
  */
 export const finaleBox = (title: string, text: string, options?: FinaleBoxOptions): string => {
 	const opts = $obj.defaults({}, options || {}, { image: '' }) as Required<ErrorBoxOptions>;

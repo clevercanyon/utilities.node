@@ -2,6 +2,8 @@
  * Utility class.
  */
 
+import './resources/init-env.js';
+
 import dotenv from 'dotenv';
 import dotenvVault from 'dotenv-vault';
 

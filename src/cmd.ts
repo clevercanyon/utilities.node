@@ -2,6 +2,8 @@
  * Utility class.
  */
 
+import './resources/init-env.js';
+
 import spawnPlease from 'spawn-please';
 import { execSync } from 'node:child_process';
 
