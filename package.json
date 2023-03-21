@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.67",
+	"version": "1.0.68",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Utilities for JavaScript apps running in a Node environment.",
@@ -26,11 +26,6 @@
 			"require": "./dist/index.cjs",
 			"types": "./dist/types/index.d.ts"
 		},
-		"./glob": {
-			"import": "./dist/glob.js",
-			"require": "./dist/glob.cjs",
-			"types": "./dist/types/glob.d.ts"
-		},
 		"./chalk": {
 			"import": "./dist/chalk.js",
 			"require": "./dist/chalk.cjs",
@@ -41,30 +36,30 @@
 			"require": "./dist/cmd.cjs",
 			"types": "./dist/types/cmd.d.ts"
 		},
-		"./yargs": {
-			"import": "./dist/yargs.js",
-			"require": "./dist/yargs.cjs",
-			"types": "./dist/types/yargs.d.ts"
-		},
 		"./dotenv": {
 			"import": "./dist/dotenv.js",
 			"require": "./dist/dotenv.cjs",
 			"types": "./dist/types/dotenv.d.ts"
 		},
-		"./path": {
-			"import": "./dist/path.js",
-			"require": "./dist/path.cjs",
-			"types": "./dist/types/path.d.ts"
+		"./fs": {
+			"import": "./dist/fs.js",
+			"require": "./dist/fs.cjs",
+			"types": "./dist/types/fs.d.ts"
+		},
+		"./glob": {
+			"import": "./dist/glob.js",
+			"require": "./dist/glob.cjs",
+			"types": "./dist/types/glob.d.ts"
 		},
 		"./prettier": {
 			"import": "./dist/prettier.js",
 			"require": "./dist/prettier.cjs",
 			"types": "./dist/types/prettier.d.ts"
 		},
-		"./fs": {
-			"import": "./dist/fs.js",
-			"require": "./dist/fs.cjs",
-			"types": "./dist/types/fs.d.ts"
+		"./yargs": {
+			"import": "./dist/yargs.js",
+			"require": "./dist/yargs.cjs",
+			"types": "./dist/types/yargs.d.ts"
 		}
 	},
 	"sideEffects": ["./src/*.{html,scss,ts,tsx}", "./src/resources/init-env.ts"],
@@ -81,7 +76,7 @@
 	"dependencies": {},
 	"peerDependencies": {
 		"@clevercanyon/split-cmd.fork": "^1.0.34",
-		"@clevercanyon/utilities": "^1.0.116",
+		"@clevercanyon/utilities": "^1.0.120",
 		"archiver": "^5.3.1",
 		"boxen": "^7.0.2",
 		"chalk": "^5.2.0",
