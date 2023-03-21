@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.65",
+	"version": "1.0.66",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Utilities for JavaScript apps running in a Node environment.",
@@ -67,7 +67,7 @@
 			"types": "./dist/types/fs.d.ts"
 		}
 	},
-	"sideEffects": ["./src/*.{html,scss,ts,tsx}"],
+	"sideEffects": ["./src/*.{html,scss,ts,tsx}", "./src/resources/init-env.ts"],
 	"module": "./dist/index.js",
 	"main": "./dist/index.cjs",
 	"browser": "",
@@ -80,8 +80,8 @@
 	},
 	"dependencies": {},
 	"peerDependencies": {
-		"@clevercanyon/split-cmd.fork": "^1.0.30",
-		"@clevercanyon/utilities": "^1.0.112",
+		"@clevercanyon/split-cmd.fork": "^1.0.33",
+		"@clevercanyon/utilities": "^1.0.115",
 		"archiver": "^5.3.1",
 		"boxen": "^7.0.2",
 		"chalk": "^5.2.0",
@@ -91,8 +91,8 @@
 		"globby": "^13.1.3",
 		"ignore": "^5.2.4",
 		"prettier": "^2.8.5",
-		"shescape": "npm:@clevercanyon/shescape.fork@^1.6.24",
-		"spawn-please": "npm:@clevercanyon/spawn-please.fork@^2.0.24",
+		"shescape": "npm:@clevercanyon/shescape.fork@^1.6.27",
+		"spawn-please": "npm:@clevercanyon/spawn-please.fork@^2.0.27",
 		"term-img": "^6.0.0",
 		"yargs": "^17.7.1",
 		"yargs-parser": "^21.1.1"
@@ -101,7 +101,7 @@
 	"optionalDependencies": {},
 	"bundleDependencies": [],
 	"devDependencies": {
-		"@clevercanyon/skeleton-dev-deps": "^1.0.135",
+		"@clevercanyon/skeleton-dev-deps": "^1.0.138",
 		"@types/archiver": "^5.3.2",
 		"@types/node": "^18.15.5",
 		"@types/yargs": "^17.0.23",
