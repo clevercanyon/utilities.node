@@ -98,7 +98,7 @@
 	"devDependencies": {
 		"@clevercanyon/skeleton-dev-deps": "^1.0.144",
 		"@types/archiver": "^5.3.2",
-		"@types/node": "^18.15.5",
+		"@types/node": "^20.1.1",
 		"@types/yargs": "^17.0.23",
 		"@types/yargs-parser": "^21.0.0"
 	},
