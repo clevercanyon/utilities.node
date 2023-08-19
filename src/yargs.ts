@@ -13,7 +13,7 @@ import { $is, $obj } from '@clevercanyon/utilities';
 /**
  * Defines types.
  */
-export interface Options {
+export type Options = {
 	bracketedArrays?: boolean;
 	scriptName?: string;
 	errorBoxName?: string;
@@ -23,7 +23,7 @@ export interface Options {
 	maxTerminalWidth?: number;
 	showHidden?: boolean;
 	strict?: boolean;
-}
+};
 import type { Argv as Yargs, Arguments as Args } from 'yargs';
 export type { Argv as Yargs, Arguments as Args } from 'yargs';
 

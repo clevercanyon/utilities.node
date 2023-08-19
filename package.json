@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"access": "restricted"
 	},
-	"version": "1.0.74",
+	"version": "1.0.75",
 	"license": "GPL-3.0-or-later",
 	"name": "@clevercanyon/utilities.node",
 	"description": "Utilities for JavaScript apps running in a Node environment.",
@@ -86,8 +86,8 @@
 	"dependencies": {},
 	"peerDependencies": {
 		"@clevercanyon/split-cmd.fork": "^1.0.38",
-		"@clevercanyon/utilities": "^1.0.131",
-		"archiver": "^5.3.1",
+		"@clevercanyon/utilities": "^1.0.152",
+		"archiver": "^5.3.2",
 		"boxen": "^7.1.1",
 		"chalk": "^5.3.0",
 		"dotenv": "^16.3.1",
@@ -105,7 +105,7 @@
 	"optionalDependencies": {},
 	"bundleDependencies": [],
 	"devDependencies": {
-		"@clevercanyon/skeleton-dev-deps": "^1.0.157"
+		"@clevercanyon/skeleton-dev-deps": "^1.0.159"
 	},
 	"overrides": {},
 	"cpu": ["x64", "arm64"],

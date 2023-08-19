@@ -12,7 +12,7 @@ import type { Options as GlobbyOptions } from 'globby';
 /**
  * Glob options.
  */
-export interface Options extends GlobbyOptions {}
+export type Options = GlobbyOptions;
 
 /**
  * Globby promise.
