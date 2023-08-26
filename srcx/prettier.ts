@@ -3,6 +3,7 @@
  */
 
 import './resources/init-env.js';
+
 import prettier from 'prettier';
 
 /**
