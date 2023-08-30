@@ -6,7 +6,6 @@ import './resources/init-env.js';
 
 import { globby, globbyStream } from 'globby';
 import { $obj } from '@clevercanyon/utilities';
-
 import type { Options as GlobbyOptions } from 'globby';
 
 /**

@@ -4,16 +4,13 @@
 
 import './resources/init-env.js';
 
-import spawnPlease from 'spawn-please';
-import { execSync } from 'node:child_process';
-
 import * as $chalk from './chalk.js';
-import { $obj } from '@clevercanyon/utilities';
-
 import * as shEscape from 'shescape';
-import * as splitCMD from '@clevercanyon/split-cmd.fork';
-
+import spawnPlease from 'spawn-please';
 import type { Chalk } from './chalk.js';
+import { execSync } from 'node:child_process';
+import { $obj } from '@clevercanyon/utilities';
+import * as splitCMD from '@clevercanyon/split-cmd.fork';
 
 const stdout = process.stdout.write.bind(process.stdout);
 const stderr = process.stderr.write.bind(process.stderr);

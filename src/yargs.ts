@@ -5,10 +5,9 @@
 import './resources/init-env.js';
 
 import yArgs from 'yargs';
-import { hideBin as yArgsꓺhideBin } from 'yargs/helpers';
-
 import * as $chalk from './chalk.js';
 import { $is, $obj } from '@clevercanyon/utilities';
+import { hideBin as yArgsꓺhideBin } from 'yargs/helpers';
 
 /**
  * Defines types.
