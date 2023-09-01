@@ -6,8 +6,8 @@ import './resources/init-env.js';
 
 import coloredBox from 'boxen';
 import termImage from 'term-img';
-import chalk, { supportsColor } from 'chalk';
 import { $obj } from '@clevercanyon/utilities';
+import { default as chalk, supportsColor } from 'chalk';
 
 /**
  * Defines types.

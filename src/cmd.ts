@@ -4,7 +4,7 @@
 
 import './resources/init-env.js';
 
-import * as $chalk from './chalk.js';
+import { $chalk } from './index.js';
 import * as shEscape from 'shescape';
 import spawnPlease from 'spawn-please';
 import type { Chalk } from './chalk.js';
