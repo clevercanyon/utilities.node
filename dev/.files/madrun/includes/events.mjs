@@ -13,7 +13,7 @@ import path from 'node:path';
 import fsp from 'node:fs/promises';
 
 import u from '../../bin/includes/utilities.mjs';
-import { $fs } from '../../../../node_modules/@clevercanyon/utilities.node/dist/index.js';
+import { $fs } from '../../../../node_modules/@clevercanyon/madrun/node_modules/@clevercanyon/utilities.node/dist/index.js';
 import { $is, $fn, $str, $url, $brand } from '../../../../node_modules/@clevercanyon/utilities/dist/index.js';
 
 const __dirname = $fs.imuDirname(import.meta.url);

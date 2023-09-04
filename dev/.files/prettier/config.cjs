@@ -22,16 +22,7 @@ const baseConfig = {
 	 * @note https://o5p.me/xCUiHS
 	 */
 	pluginSearchDirs: false,
-	plugins: [
-		'prettier-plugin-jsdoc', //
-		'prettier-plugin-ini',
-		'prettier-plugin-properties',
-		'@prettier/plugin-xml',
-		'@prettier/plugin-php',
-		'prettier-plugin-sql',
-		'@prettier/plugin-ruby',
-		'prettier-plugin-sh',
-	],
+	plugins: ['prettier-plugin-ini', 'prettier-plugin-properties', '@prettier/plugin-xml', '@prettier/plugin-ruby'],
 
 	/**
 	 * Standard options.
@@ -79,44 +70,6 @@ module.exports = {
 		},
 		{
 			/**
-			 * JSDoc plugin options.
-			 *
-			 * @see https://o5p.me/dTTfse
-			 */
-			files: ['*.{js,jsx,cjs,cjsx,node,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtsx}'],
-			options: {
-				jsdocAddDefaultToDescription: false,
-				jsdocCapitalizeDescription: true,
-				jsdocDescriptionTag: false,
-				jsdocDescriptionWithDot: true,
-				jsdocKeepUnParseAbleExampleIndent: false,
-				jsdocLineWrappingStyle: 'greedy',
-				jsdocPreferCodeFences: false,
-				jsdocPrintWidth: 120,
-				jsdocSeparateReturnsFromParam: false,
-				jsdocSeparateTagGroups: true,
-				jsdocSingleLineComment: false,
-				jsdocSpaces: 1,
-				jsdocVerticalAlignment: true,
-				tsdoc: false,
-			},
-		},
-		{
-			/**
-			 * PHP plugin options.
-			 *
-			 * @see https://o5p.me/BHsZj8
-			 */
-			files: ['*.php'],
-			options: {
-				parser: 'php',
-				braceStyle: '1tbs',
-				phpVersion: '8.1',
-				trailingCommaPHP: true,
-			},
-		},
-		{
-			/**
 			 * Ruby plugin options.
 			 *
 			 * @see https://o5p.me/tuKNvU
@@ -126,54 +79,6 @@ module.exports = {
 				parser: 'ruby',
 				rubyPlugins: '',
 				rubySingleQuote: true,
-			},
-		},
-		{
-			/**
-			 * SH plugin options.
-			 *
-			 * @see https://o5p.me/D0rlOV
-			 */
-			files: ['*.bash', '{,*.}Dockerfile'],
-			options: {
-				parser: 'sh',
-				binaryNextLine: false,
-				experimentalWasm: false,
-				functionNextLine: false,
-				indent: 4,
-				keepComments: true,
-				keepPadding: false,
-				minify: false,
-				spaceRedirects: true,
-				stopAt: undefined,
-				switchCaseIndent: true,
-				variant: 0, // Bash.
-			},
-		},
-		{
-			/**
-			 * SQL plugin options.
-			 *
-			 * @see https://o5p.me/kYq5bx
-			 */
-			files: ['*.sql'],
-			options: {
-				parser: 'sql',
-				commaPosition: 'after',
-				database: 'mysql',
-				denseOperators: false,
-				expressionWidth: 180,
-				formatter: 'sql-formatter',
-				indentStyle: 'standard',
-				keywordCase: 'upper',
-				language: 'sql',
-				linesBetweenQueries: 1,
-				logicalOperatorNewline: 'before',
-				newlineBeforeSemicolon: false,
-				params: Object,
-				paramTypes: Object,
-				tabulateAlias: false,
-				type: 'table',
 			},
 		},
 		{

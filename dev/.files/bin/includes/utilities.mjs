@@ -17,7 +17,7 @@ import { Octokit as OctokitCore } from '@octokit/core';
 import { paginateRest as OctokitPluginPaginateRest } from '@octokit/plugin-paginate-rest';
 
 import { $is, $str, $obj, $obp, $url, $version } from '../../../../node_modules/@clevercanyon/utilities/dist/index.js';
-import { $fs, $cmd, $chalk, $dotenv, $prettier } from '../../../../node_modules/@clevercanyon/utilities.node/dist/index.js';
+import { $fs, $cmd, $chalk, $dotenv, $prettier } from '../../../../node_modules/@clevercanyon/madrun/node_modules/@clevercanyon/utilities.node/dist/index.js';
 
 const __dirname = $fs.imuDirname(import.meta.url);
 const binDir = path.resolve(__dirname, '..');
