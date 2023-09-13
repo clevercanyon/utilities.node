@@ -15,7 +15,7 @@
 
 	"compilerOptions": {
 		"lib": ["es2022"],
-		"types": ["vite/client", "@types/node", "@types/prettier", "@types/archiver", "@types/yargs", "@types/yargs-parser"]
+		"types": ["vite/client", "@types/node", "@types/archiver", "@types/yargs", "@types/yargs-parser"]
 	}
 	/* </custom:end> */
 }

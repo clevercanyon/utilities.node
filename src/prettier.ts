@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import './resources/init-env.js';
+import './resources/init-env.ts';
 
 import prettier from 'prettier';
 

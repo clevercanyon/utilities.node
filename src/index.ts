@@ -2,12 +2,12 @@
  * Utility exports.
  */
 
-import './resources/init-env.js';
+import './resources/init-env.ts';
 
-export * as $chalk from './chalk.js';
-export * as $cmd from './cmd.js';
-export * as $dotenv from './dotenv.js';
-export * as $fs from './fs.js';
-export * as $glob from './glob.js';
-export * as $prettier from './prettier.js';
-export * as $yargs from './yargs.js';
+export * as $chalk from './chalk.ts';
+export * as $cmd from './cmd.ts';
+export * as $dotenv from './dotenv.ts';
+export * as $fs from './fs.ts';
+export * as $glob from './glob.ts';
+export * as $prettier from './prettier.ts';
+export * as $yargs from './yargs.ts';

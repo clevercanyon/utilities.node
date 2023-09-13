@@ -2,11 +2,11 @@
  * Utility class.
  */
 
-import './resources/init-env.js';
+import './resources/init-env.ts';
 
-import { globby, globbyStream } from 'globby';
 import { $obj } from '@clevercanyon/utilities';
 import type { Options as GlobbyOptions } from 'globby';
+import { globby, globbyStream } from 'globby';
 
 /**
  * Glob options.

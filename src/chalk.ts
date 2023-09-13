@@ -2,12 +2,12 @@
  * Utility class.
  */
 
-import './resources/init-env.js';
+import './resources/init-env.ts';
 
-import coloredBox from 'boxen';
-import termImage from 'term-img';
 import { $obj } from '@clevercanyon/utilities';
+import coloredBox from 'boxen';
 import { default as chalk, supportsColor } from 'chalk';
+import termImage from 'term-img';
 
 /**
  * Defines types.

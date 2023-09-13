@@ -2,12 +2,13 @@
  * Utility class.
  */
 
-import './resources/init-env.js';
+import './resources/init-env.ts';
 
-import yArgs from 'yargs';
-import { $chalk } from './index.js';
 import { $is, $obj } from '@clevercanyon/utilities';
+import type { Arguments as Args, Argv as Yargs } from 'yargs';
+import yArgs from 'yargs';
 import { hideBin as yArgsꓺhideBin } from 'yargs/helpers';
+import { $chalk } from './index.ts';
 
 /**
  * Defines types.
@@ -23,8 +24,7 @@ export type Options = {
 	showHidden?: boolean;
 	strict?: boolean;
 };
-import type { Argv as Yargs, Arguments as Args } from 'yargs';
-export type { Argv as Yargs, Arguments as Args } from 'yargs';
+export type { Arguments as Args, Argv as Yargs } from 'yargs';
 
 /**
  * Creates a new Yargs CLI instance.
