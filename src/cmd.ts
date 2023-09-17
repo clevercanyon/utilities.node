@@ -7,13 +7,16 @@ import './resources/init-env.ts';
 import * as splitCMD from '@clevercanyon/split-cmd.fork';
 import { $obj } from '@clevercanyon/utilities';
 import { execSync } from 'node:child_process';
-import * as shEscape from 'shescape';
+import { Shescape as ShEscape } from 'shescape';
 import spawnPlease from 'spawn-please';
 import type { Chalk } from './chalk.ts';
 import { $chalk } from './index.ts';
 
 const stdout = process.stdout.write.bind(process.stdout);
 const stderr = process.stderr.write.bind(process.stderr);
+
+const bash = 'bash'; // We only use `bash` for shell scripting.
+const shellWarning = 'Only `'+bash+'` shell is supported at this time.';
 
 /**
  * Defines types.
@@ -29,7 +32,14 @@ export const { splitCMD: split } = splitCMD;
 /**
  * Shell escape utilities.
  */
-export const { escape: esc, escapeAll: escAll, quote, quoteAll } = shEscape;
+const shEscape = new ShEscape({
+	shell: bash,
+	flagProtection: false
+});
+export const esc = shEscape.escape.bind(shEscape);
+export const escAll = shEscape.escapeAll.bind(shEscape);
+export const quote = shEscape.quote.bind(shEscape);
+export const quoteAll = shEscape.quoteAll.bind(shEscape);
 
 /**
  * Spawns command line operation.
@@ -49,14 +59,17 @@ export const { escape: esc, escapeAll: escAll, quote, quoteAll } = shEscape;
  */
 export const spawn = async (cmd: string, args: string[] = [], options?: SpawnOptions): Promise<string> => {
 	const opts = $obj.defaults({}, options || {}, { quiet: false, stdoutChalk: $chalk.white, stderrChalk: $chalk.gray }) as Required<SpawnOptions>;
+	const shell = 'shell' in opts ? opts.shell : bash; // For check below.
 
-	if ('shell' in opts ? opts.shell : 'bash') {
-		// When using a shell, we must escape everything ourselves.
+	if (shell && shell !== bash) {
+		throw new Error(shellWarning); // Because we must match `ShEscape`.
+	}
+	if (shell /* When using a shell, we must escape everything ourselves. */) {
 		// i.e., Node does not escape `cmd` or `args` when a `shell` is given.
 		(cmd = quote(cmd)), (args = quoteAll(args));
 	}
 	return await spawnPlease(cmd, args, {
-		shell: 'bash',
+		shell: bash,
 		cwd: process.cwd(),
 		env: { ...process.env },
 
@@ -87,10 +100,14 @@ export const spawn = async (cmd: string, args: string[] = [], options?: SpawnOpt
  */
 export const exec = async (cmd: string, options?: ExecOptions): Promise<string> => {
 	const opts = $obj.defaults({}, options || {}, { quiet: false }) as Required<ExecOptions>;
+	const shell = 'shell' in opts ? opts.shell : bash; // For check below.
 
+	if (shell && shell !== bash) {
+		throw new Error(shellWarning); // Because we must match `ShEscape`.
+	}
 	return (
 		execSync(cmd, {
-			shell: 'bash',
+			shell: bash,
 			cwd: process.cwd(),
 			env: { ...process.env },
 
