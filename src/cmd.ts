@@ -16,7 +16,7 @@ const stdout = process.stdout.write.bind(process.stdout);
 const stderr = process.stderr.write.bind(process.stderr);
 
 const bash = 'bash'; // We only use `bash` for shell scripting.
-const shellWarning = 'Only `'+bash+'` shell is supported at this time.';
+const shellWarning = 'Only `' + bash + '` shell is supported at this time.';
 
 /**
  * Defines types.
@@ -34,7 +34,7 @@ export const { splitCMD: split } = splitCMD;
  */
 const shEscape = new ShEscape({
 	shell: bash,
-	flagProtection: false
+	flagProtection: false,
 });
 export const esc = shEscape.escape.bind(shEscape);
 export const escAll = shEscape.escapeAll.bind(shEscape);

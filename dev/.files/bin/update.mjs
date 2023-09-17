@@ -451,7 +451,7 @@ class Project {
 
 		u.log($chalk.green('Updating NPM packages.'));
 		if (!this.args.dryRun) {
-			// await u.npmUpdate();
+			await u.npmUpdate();
 		}
 
 		/**
