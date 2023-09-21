@@ -25,7 +25,7 @@ export { default as archiver } from 'archiver';
  * @returns               ES module `import.meta.url` directory name.
  */
 export const imuDirname = (importMetaURL: string): string => {
-	return path.dirname(imuFilename(importMetaURL));
+    return path.dirname(imuFilename(importMetaURL));
 };
 
 /**
@@ -36,5 +36,5 @@ export const imuDirname = (importMetaURL: string): string => {
  * @returns               ES module `import.meta.url` file name.
  */
 export const imuFilename = (importMetaURL: string): string => {
-	return url.fileURLToPath(importMetaURL);
+    return url.fileURLToPath(importMetaURL);
 };

@@ -25,45 +25,45 @@ export const { hex, bgHex, rgb, bgRgb, ansi256, bgAnsi256 } = chalk;
 export const { reset, bold, dim, italic, underline, overline, inverse, hidden, strikethrough, visible } = chalk;
 
 export const {
-	black,
-	red,
-	green,
-	yellow,
-	blue,
-	magenta,
-	cyan,
-	white,
-	blackBright,
-	gray,
-	grey,
-	redBright,
-	greenBright,
-	yellowBright,
-	blueBright,
-	magentaBright,
-	cyanBright,
-	whiteBright,
+    black,
+    red,
+    green,
+    yellow,
+    blue,
+    magenta,
+    cyan,
+    white,
+    blackBright,
+    gray,
+    grey,
+    redBright,
+    greenBright,
+    yellowBright,
+    blueBright,
+    magentaBright,
+    cyanBright,
+    whiteBright,
 } = chalk;
 
 export const {
-	bgBlack,
-	bgRed,
-	bgGreen,
-	bgYellow,
-	bgBlue,
-	bgMagenta,
-	bgCyan,
-	bgWhite,
-	bgBlackBright,
-	bgGray,
-	bgGrey,
-	bgRedBright,
-	bgGreenBright,
-	bgYellowBright,
-	bgBlueBright,
-	bgMagentaBright,
-	bgCyanBright,
-	bgWhiteBright,
+    bgBlack,
+    bgRed,
+    bgGreen,
+    bgYellow,
+    bgBlue,
+    bgMagenta,
+    bgCyan,
+    bgWhite,
+    bgBlackBright,
+    bgGray,
+    bgGrey,
+    bgRedBright,
+    bgGreenBright,
+    bgYellowBright,
+    bgBlueBright,
+    bgMagentaBright,
+    bgCyanBright,
+    bgWhiteBright,
 } = chalk;
 
 /**
@@ -76,28 +76,28 @@ export const {
  * @returns         Output error string.
  */
 export const errorBox = (title: string, text: string, options?: ErrorBoxOptions): string => {
-	const opts = $obj.defaults({}, options || {}, { image: '' }) as Required<ErrorBoxOptions>;
+    const opts = $obj.defaults({}, options || {}, { image: '' }) as Required<ErrorBoxOptions>;
 
-	if (!process.stdout.isTTY || !supportsColor || !supportsColor?.has16m) {
-		return chalk.red(text); // No box.
-	}
-	return (
-		'\n' +
-		coloredBox(chalk.bold.red(text), {
-			margin: 0,
-			padding: 0.75,
-			textAlignment: 'left',
+    if (!process.stdout.isTTY || !supportsColor || !supportsColor?.has16m) {
+        return chalk.red(text); // No box.
+    }
+    return (
+        '\n' +
+        coloredBox(chalk.bold.red(text), {
+            margin: 0,
+            padding: 0.75,
+            textAlignment: 'left',
 
-			dimBorder: false,
-			borderStyle: 'round',
-			borderColor: '#551819',
-			backgroundColor: '',
+            dimBorder: false,
+            borderStyle: 'round',
+            borderColor: '#551819',
+            backgroundColor: '',
 
-			titleAlignment: 'left',
-			title: chalk.bold.redBright('⚑ ' + title),
-		}) +
-		(opts.image ? '\n' + termImage(opts.image, { width: '300px', fallback: () => '' }) : '')
-	);
+            titleAlignment: 'left',
+            title: chalk.bold.redBright('⚑ ' + title),
+        }) +
+        (opts.image ? '\n' + termImage(opts.image, { width: '300px', fallback: () => '' }) : '')
+    );
 };
 
 /**
@@ -110,26 +110,26 @@ export const errorBox = (title: string, text: string, options?: ErrorBoxOptions)
  * @returns         Output finale string.
  */
 export const finaleBox = (title: string, text: string, options?: FinaleBoxOptions): string => {
-	const opts = $obj.defaults({}, options || {}, { image: '' }) as Required<ErrorBoxOptions>;
+    const opts = $obj.defaults({}, options || {}, { image: '' }) as Required<ErrorBoxOptions>;
 
-	if (!process.stdout.isTTY || !supportsColor || !supportsColor?.has16m) {
-		return chalk.green(text); // No box.
-	}
-	return (
-		'\n' +
-		coloredBox(chalk.bold.hex('#ed5f3b')(text), {
-			margin: 0,
-			padding: 0.75,
-			textAlignment: 'left',
+    if (!process.stdout.isTTY || !supportsColor || !supportsColor?.has16m) {
+        return chalk.green(text); // No box.
+    }
+    return (
+        '\n' +
+        coloredBox(chalk.bold.hex('#ed5f3b')(text), {
+            margin: 0,
+            padding: 0.75,
+            textAlignment: 'left',
 
-			dimBorder: false,
-			borderStyle: 'round',
-			borderColor: '#8e3923',
-			backgroundColor: '',
+            dimBorder: false,
+            borderStyle: 'round',
+            borderColor: '#8e3923',
+            backgroundColor: '',
 
-			titleAlignment: 'left',
-			title: chalk.bold.green('✓ ' + title),
-		}) +
-		(opts.image ? '\n' + termImage(opts.image, { width: '300px', fallback: () => '' }) : '')
-	);
+            titleAlignment: 'left',
+            title: chalk.bold.green('✓ ' + title),
+        }) +
+        (opts.image ? '\n' + termImage(opts.image, { width: '300px', fallback: () => '' }) : '')
+    );
 };

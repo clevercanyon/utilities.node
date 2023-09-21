@@ -26,19 +26,19 @@ import { $obj } from './node_modules/@clevercanyon/utilities/dist/index.js';
  * <custom:start> */
 
 export default await (async () => {
-	return $obj.mergeDeep({}, await baseConfig(), {
-		compilerOptions: {
-			$concat: {
-				lib: [],
-				types: [
-					'@types/node', //
-					'@types/yargs',
-					'@types/archiver',
-					'@types/yargs-parser',
-				],
-			},
-		},
-	});
+    return $obj.mergeDeep({}, await baseConfig(), {
+        compilerOptions: {
+            $concat: {
+                lib: [],
+                types: [
+                    '@types/node', //
+                    '@types/yargs',
+                    '@types/archiver',
+                    '@types/yargs-parser',
+                ],
+            },
+        },
+    });
 })();
 
 /* </custom:end> */

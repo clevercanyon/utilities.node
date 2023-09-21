@@ -28,13 +28,13 @@ export type Options = GlobbyOptions & { ignoreCase?: boolean };
  * @see https://github.com/sindresorhus/globby#globbystreampatterns-options
  */
 export const promise = async (patterns: string | string[], options?: Options): Promise<ReturnType<typeof globby>> => {
-	const opts = $obj.defaults({}, options || {}, { expandDirectories: false, caseSensitiveMatch: true, absolute: true }) as Options;
+    const opts = $obj.defaults({}, options || {}, { expandDirectories: false, caseSensitiveMatch: true, absolute: true }) as Options;
 
-	if ($obj.hasOwn(opts, 'ignoreCase')) {
-		opts.caseSensitiveMatch = opts.ignoreCase ? false : true;
-		delete opts.ignoreCase;
-	}
-	return globby(patterns, opts);
+    if ($obj.hasOwn(opts, 'ignoreCase')) {
+        opts.caseSensitiveMatch = opts.ignoreCase ? false : true;
+        delete opts.ignoreCase;
+    }
+    return globby(patterns, opts);
 };
 
 /**
@@ -52,11 +52,11 @@ export const promise = async (patterns: string | string[], options?: Options): P
  * @see https://github.com/sindresorhus/globby#globbystreampatterns-options
  */
 export const stream = (patterns: string | string[], options?: Options): ReturnType<typeof globbyStream> => {
-	const opts = $obj.defaults({}, options || {}, { expandDirectories: false, caseSensitiveMatch: true, absolute: true }) as Options;
+    const opts = $obj.defaults({}, options || {}, { expandDirectories: false, caseSensitiveMatch: true, absolute: true }) as Options;
 
-	if ($obj.hasOwn(opts, 'ignoreCase')) {
-		opts.caseSensitiveMatch = opts.ignoreCase ? false : true;
-		delete opts.ignoreCase;
-	}
-	return globbyStream(patterns, opts);
+    if ($obj.hasOwn(opts, 'ignoreCase')) {
+        opts.caseSensitiveMatch = opts.ignoreCase ? false : true;
+        delete opts.ignoreCase;
+    }
+    return globbyStream(patterns, opts);
 };

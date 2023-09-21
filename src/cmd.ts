@@ -33,8 +33,8 @@ export const { splitCMD: split } = splitCMD;
  * Shell escape utilities.
  */
 const shEscape = new ShEscape({
-	shell: bash,
-	flagProtection: false,
+    shell: bash,
+    flagProtection: false,
 });
 export const esc = shEscape.escape.bind(shEscape);
 export const escAll = shEscape.escapeAll.bind(shEscape);
@@ -58,29 +58,29 @@ export const quoteAll = shEscape.quoteAll.bind(shEscape);
  *   - Stdout when `quiet: true`, which also implies `stdio: 'pipe'`.
  */
 export const spawn = async (cmd: string, args: string[] = [], options?: SpawnOptions): Promise<string> => {
-	const opts = $obj.defaults({}, options || {}, { quiet: false, stdoutChalk: $chalk.white, stderrChalk: $chalk.gray }) as Required<SpawnOptions>;
-	const shell = 'shell' in opts ? opts.shell : bash; // For check below.
+    const opts = $obj.defaults({}, options || {}, { quiet: false, stdoutChalk: $chalk.white, stderrChalk: $chalk.gray }) as Required<SpawnOptions>;
+    const shell = 'shell' in opts ? opts.shell : bash; // For check below.
 
-	if (shell && shell !== bash) {
-		throw new Error(shellWarning); // Because we must match `ShEscape`.
-	}
-	if (shell /* When using a shell, we must escape everything ourselves. */) {
-		// i.e., Node does not escape `cmd` or `args` when a `shell` is given.
-		(cmd = quote(cmd)), (args = quoteAll(args));
-	}
-	return await spawnPlease(cmd, args, {
-		shell: bash,
-		cwd: process.cwd(),
-		env: { ...process.env },
+    if (shell && shell !== bash) {
+        throw new Error(shellWarning); // Because we must match `ShEscape`.
+    }
+    if (shell /* When using a shell, we must escape everything ourselves. */) {
+        // i.e., Node does not escape `cmd` or `args` when a `shell` is given.
+        (cmd = quote(cmd)), (args = quoteAll(args));
+    }
+    return await spawnPlease(cmd, args, {
+        shell: bash,
+        cwd: process.cwd(),
+        env: { ...process.env },
 
-		// Output handlers do not run when `stdio: 'inherit'` or `quiet: true`.
-		stdio: opts.quiet ? 'pipe' : 'inherit', // `pipe` enables output handlers below.
+        // Output handlers do not run when `stdio: 'inherit'` or `quiet: true`.
+        stdio: opts.quiet ? 'pipe' : 'inherit', // `pipe` enables output handlers below.
 
-		stdout: opts.quiet ? null : (buffer: Buffer) => stdout(opts.stdoutChalk(buffer.toString())),
-		stderr: opts.quiet ? null : (buffer: Buffer) => stderr(opts.stderrChalk(buffer.toString())),
+        stdout: opts.quiet ? null : (buffer: Buffer) => stdout(opts.stdoutChalk(buffer.toString())),
+        stderr: opts.quiet ? null : (buffer: Buffer) => stderr(opts.stderrChalk(buffer.toString())),
 
-		...$obj.omit(opts, ['quiet', 'stdoutChalk', 'stderrChalk']),
-	});
+        ...$obj.omit(opts, ['quiet', 'stdoutChalk', 'stderrChalk']),
+    });
 };
 
 /**
@@ -99,22 +99,22 @@ export const spawn = async (cmd: string, args: string[] = [], options?: SpawnOpt
  *   - Stdout when `quiet: true`, which also implies `stdio: 'pipe'`.
  */
 export const exec = async (cmd: string, options?: ExecOptions): Promise<string> => {
-	const opts = $obj.defaults({}, options || {}, { quiet: false }) as Required<ExecOptions>;
-	const shell = 'shell' in opts ? opts.shell : bash; // For check below.
+    const opts = $obj.defaults({}, options || {}, { quiet: false }) as Required<ExecOptions>;
+    const shell = 'shell' in opts ? opts.shell : bash; // For check below.
 
-	if (shell && shell !== bash) {
-		throw new Error(shellWarning); // Because we must match `ShEscape`.
-	}
-	return (
-		execSync(cmd, {
-			shell: bash,
-			cwd: process.cwd(),
-			env: { ...process.env },
+    if (shell && shell !== bash) {
+        throw new Error(shellWarning); // Because we must match `ShEscape`.
+    }
+    return (
+        execSync(cmd, {
+            shell: bash,
+            cwd: process.cwd(),
+            env: { ...process.env },
 
-			stdio: opts.quiet ? 'pipe' : 'inherit',
-			// `execSync` does not support output handlers.
+            stdio: opts.quiet ? 'pipe' : 'inherit',
+            // `execSync` does not support output handlers.
 
-			...$obj.omit(opts, ['quiet']),
-		}) || Buffer.from('')
-	).toString();
+            ...$obj.omit(opts, ['quiet']),
+        }) || Buffer.from('')
+    ).toString();
 };
