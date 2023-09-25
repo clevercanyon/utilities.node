@@ -30,7 +30,7 @@ export type Options = GlobbyOptions & { ignoreCase?: boolean };
 export const promise = async (patterns: string | string[], options?: Options): Promise<ReturnType<typeof globby>> => {
     const opts = $obj.defaults({}, options || {}, { expandDirectories: false, caseSensitiveMatch: true, absolute: true }) as Options;
 
-    if ($obj.hasOwn(opts, 'ignoreCase')) {
+    if (Object.hasOwn(opts, 'ignoreCase')) {
         opts.caseSensitiveMatch = opts.ignoreCase ? false : true;
         delete opts.ignoreCase;
     }
@@ -54,7 +54,7 @@ export const promise = async (patterns: string | string[], options?: Options): P
 export const stream = (patterns: string | string[], options?: Options): ReturnType<typeof globbyStream> => {
     const opts = $obj.defaults({}, options || {}, { expandDirectories: false, caseSensitiveMatch: true, absolute: true }) as Options;
 
-    if ($obj.hasOwn(opts, 'ignoreCase')) {
+    if (Object.hasOwn(opts, 'ignoreCase')) {
         opts.caseSensitiveMatch = opts.ignoreCase ? false : true;
         delete opts.ignoreCase;
     }
