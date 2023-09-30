@@ -76,7 +76,7 @@
     "dependencies": {},
     "peerDependencies": {
         "@clevercanyon/split-cmd.fork": "^1.0.62",
-        "@clevercanyon/utilities": "^1.0.287",
+        "@clevercanyon/utilities": "^1.0.291",
         "archiver": "^5.3.2",
         "boxen": "^7.1.1",
         "chalk": "^5.3.0",
