@@ -39,10 +39,7 @@ export const { expand } = dotenvExpand;
  */
 export const parseExpand = (file: string, options?: ParseExpandOptions): $type.Object => {
     const opts = $obj.defaults({}, options || {}, { ignoreProcessEnv: true }) as Required<ParseExpandOptions>;
-
-    if (!fs.existsSync(file)) return {};
     const props = fs.readFileSync(file).toString();
-
     return (
         dotenvExpand.expand({
             parsed: dotenv.parse(props),
