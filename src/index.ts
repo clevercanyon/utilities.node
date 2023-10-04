@@ -2,7 +2,7 @@
  * Utility exports.
  */
 
-import './resources/init-env.ts';
+import './resources/init.ts';
 
 export * as $chalk from './chalk.ts';
 export * as $cmd from './cmd.ts';

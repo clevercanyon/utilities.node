@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import './resources/init-env.ts';
+import './resources/init.ts';
 
 import { $obj } from '@clevercanyon/utilities';
 import coloredBox from 'boxen';

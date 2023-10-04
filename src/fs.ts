@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import './resources/init-env.ts';
+import './resources/init.ts';
 
 import path from 'node:path';
 import url from 'node:url';

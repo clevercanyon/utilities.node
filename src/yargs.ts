@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import './resources/init-env.ts';
+import './resources/init.ts';
 
 import { $is, $obj } from '@clevercanyon/utilities';
 import type { Arguments as Args, Argv as Yargs } from 'yargs';

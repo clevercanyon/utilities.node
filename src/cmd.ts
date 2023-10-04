@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import './resources/init-env.ts';
+import './resources/init.ts';
 
 import * as splitCMD from '@clevercanyon/split-cmd.fork';
 import { $obj } from '@clevercanyon/utilities';
