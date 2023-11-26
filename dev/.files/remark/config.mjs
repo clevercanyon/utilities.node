@@ -15,7 +15,6 @@ import pluginFrontmatter from 'remark-frontmatter';
 import pluginGFM from 'remark-gfm';
 import remarkLint from 'remark-lint';
 import pluginMermaid from 'remark-mermaidjs';
-import pluginOembed from 'remark-oembed';
 import presetLintRecommended from 'remark-preset-lint-recommended';
 import presetPrettier from 'remark-preset-prettier';
 import pluginSmartyPants from 'remark-smartypants';
@@ -33,9 +32,9 @@ export default async () => {
             bulletOrdered: '.',
             bulletOther: '*',
             closeAtx: false,
-            emphasis: '_',
+            emphasis: '*',
             fence: '`',
-            fences: true,
+            fences: false,
             incrementListMarker: true,
             listItemIndent: 'mixed',
             quote: '"',
@@ -52,26 +51,14 @@ export default async () => {
             presetLintRecommended, // Linting basics.
             presetPrettier, // Removes conflicting lint rules.
 
-            pluginFrontmatter, // YAML properties.
-            pluginGFM, // GitHub-flavored markdown features.
+            pluginFrontmatter, // Frontmatter.
+            [pluginGFM, { singleTilde: false }], // GFM features.
             pluginSmartyPants, // (em dash) `--` to `—`, quotes, etc.
-            [pluginOembed, { syncWidget: true }], // oEmbeds for markdown.
             pluginMermaid, // Charting and diagramming; {@see https://o5p.me/5z7Yrt}.
             pluginDirective, // Custom directives; {@see https://o5p.me/0fakce}.
 
             // Disable this rule, as GFM explicitly allows this.
-            // Also, because the oEmbed plugin explicitly allows this.
             ['remark-lint-no-literal-urls', false],
         ],
-        tsconfigMDX: {
-            plugins: [
-                'remark-frontmatter', // YAML properties.
-                'remark-gfm', // GitHub-flavored markdown features.
-                'remark-smartypants', // (em dash) `--` to `—`, quotes, etc.
-                ['remark-oembed', { syncWidget: true }], // oEmbeds for markdown.
-                'remark-mermaidjs', // Charting and diagramming; {@see https://o5p.me/5z7Yrt}.
-                'remark-directive', // Custom directives; {@see https://o5p.me/0fakce}.
-            ],
-        },
     };
 };

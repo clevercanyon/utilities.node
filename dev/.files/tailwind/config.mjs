@@ -18,7 +18,6 @@ Example `index.scss` starter file contents:
 @use '../dev/.files/tailwind/layers';
 -------------------------------------------------------------------------------------------------------------------- */
 
-import pluginForms from '@tailwindcss/forms';
 import pluginTypography from '@tailwindcss/typography';
 import pluginTypographyStyles from '@tailwindcss/typography/src/styles.js';
 import fs from 'node:fs';
@@ -54,9 +53,9 @@ export default /* not async compatible */ ({ themesConfig } = {}) => {
                 // Less than or equal to, in descending specificity order.
                 // The order matters, because it affects specificity.
                 'lte-widescreen': { raw: '(max-width: none)' },
-                'lte-desktop': { max: '2559px' },
-                'lte-laptop': { max: '1439px' },
-                'lte-notebook': { max: '1279px' },
+                'lte-desktop': { raw: '(max-width: 2559px)' },
+                'lte-laptop': { raw: '(max-width: 1439px)' },
+                'lte-notebook': { raw: '(max-width: 1279px)' },
                 'lte-tablet': { raw: '(max-width: 959px)' },
                 'lte-phone': { raw: '(max-width: 479px)' },
 
@@ -64,18 +63,18 @@ export default /* not async compatible */ ({ themesConfig } = {}) => {
                 // The order matters, because it affects specificity.
                 'gte-phone': { raw: '(min-width: 320px)' },
                 'gte-tablet': { raw: '(min-width: 480px)' },
-                'gte-notebook': { min: '960px' },
-                'gte-laptop': { min: '1280px' },
-                'gte-desktop': { min: '1440px' },
+                'gte-notebook': { raw: '(min-width: 960px)' },
+                'gte-laptop': { raw: '(min-width: 1280px)' },
+                'gte-desktop': { raw: '(min-width: 1440px)' },
                 'gte-widescreen': { raw: '(min-width: 2560px)' },
 
                 // Device-specific min/max breakpoints, in any order.
                 // Order doesn’t really matter due to min/max specificity.
                 'phone': { raw: '(min-width: 320px) and (max-width: 479px)' },
                 'tablet': { raw: '(min-width: 480px) and (max-width: 959px)' },
-                'notebook': { min: '960px', max: '1279px' },
-                'laptop': { min: '1280px', max: '1439px' },
-                'desktop': { min: '1440px', max: '2559px' },
+                'notebook': { min: '960px', max: '1279px' }, // Container max-width: 960px.
+                'laptop': { min: '1280px', max: '1439px' }, // Container max-width: 1280px.
+                'desktop': { min: '1440px', max: '2559px' }, // Container max-width: 1440px.
                 'widescreen': { raw: '(min-width: 2560px)' },
 
                 // Note: We use `raw` to avoid smaller breakpoints becoming a max-width for containers.
@@ -85,30 +84,150 @@ export default /* not async compatible */ ({ themesConfig } = {}) => {
             container: { center: true }, // No need for `mx-auto` on each container.
 
             extend: {
-                typography: {
-                    // This makes `<code>` appear almost the same as `<kbd>`.
-                    sm: { css: { 'code': { ...pluginTypographyStyles.sm.css[0]['kbd'] } } },
-                    base: { css: { 'code': { ...pluginTypographyStyles.base.css[0]['kbd'] } } },
-                    lg: { css: { 'code': { ...pluginTypographyStyles.lg.css[0]['kbd'] } } },
-                    xl: { css: { 'code': { ...pluginTypographyStyles.xl.css[0]['kbd'] } } },
-                    '2xl': { css: { 'code': { ...pluginTypographyStyles['2xl'].css[0]['kbd'] } } },
+                // We have to declare screen sizes explicitly for `min/max` widths.
+                // The reason is because our `screens` configuration uses complex values.
+                // For further details, {@see https://o5p.me/oLXcju}.
+                minWidth: {
+                    'phone': '320px',
+                    'tablet': '480px',
+                    'notebook': '960px',
+                    'laptop': '1280px',
+                    'desktop': '1440px',
+                    'widescreen': 'none',
 
+                    '1/4': '25%',
+                    '1/2': '50%',
+                    '3/4': '75%',
+                    '1/3': '33.333%',
+                    '2/3': '66.667%',
+                },
+                maxWidth: {
+                    'phone': '320px',
+                    'tablet': '480px',
+                    'notebook': '960px',
+                    'laptop': '1280px',
+                    'desktop': '1440px',
+                    'widescreen': 'none',
+
+                    '1/4': '25%',
+                    '1/2': '50%',
+                    '3/4': '75%',
+                    '1/3': '33.333%',
+                    '2/3': '66.667%',
+                },
+                typography: {
                     DEFAULT: {
                         css: {
-                            // Prose link underline on hover only.
-                            'a': {
+                            maxWidth: null,
+
+                            '.link': {
+                                ...pluginTypographyStyles.DEFAULT.css[0]['a'],
+                            },
+                            '.link code': {
+                                ...pluginTypographyStyles.DEFAULT.css[0]['a code'],
+                            },
+                            '.link strong': {
+                                ...pluginTypographyStyles.DEFAULT.css[0]['a strong'],
+                            },
+                            'a, .link': {
+                                cursor: 'pointer',
                                 textDecoration: 'none',
                             },
-                            'a:hover': {
+                            'a:hover, .link:hover': {
                                 textDecoration: 'underline',
                             },
-                            // This makes `<code>` appear almost the same as `<kbd>`.
-                            'code::before': null, // Gets rid of '`' backtick.
-                            'code::after': null, // Gets rid of '`' backtick.
-                            'code': {
+                            'hr': {
+                                marginTop: '1.5em',
+                                marginBottom: '1.5em',
+                            },
+                            'pre': {
+                                border: '1px solid rgb(var(--colors-color-prose-pre-borders))',
+                                boxShadow: 'inset 0 0 2px 2px rgb(var(--colors-color-prose-pre-shadows))',
+                            },
+                            'code::before': null,
+                            'code::after': null,
+                            'code:not(:where(pre code))': {
+                                // fontSize: em(14, 16),
+                                // borderRadius: rem(5),
+                                // paddingTop: em(3, 16),
+                                // paddingRight: em(6, 16),
+                                // paddingBottom: em(3, 16),
+                                // paddingLeft: em(6, 16),
+                                // All included in base `<kbd>` styles.
                                 ...pluginTypographyStyles.base.css[0]['kbd'],
                                 borderRadius: '0.188rem', // Equivalent to 3px.
-                                boxShadow: '0 0 0 1px rgb(var(--tw-prose-code-shadows) / 10%)',
+                                boxShadow: '0 0 0 2px rgb(var(--tw-prose-code-shadows) / 12%)',
+                            },
+                            'kbd': {
+                                boxShadow:
+                                    '0 1px 0 2px rgb(var(--tw-prose-kbd-shadows) / 20%),' + //
+                                    ' 0 1px 10px 0 rgb(var(--tw-prose-kbd-shadows) / 20%)',
+                            },
+                            'mark': {
+                                // fontSize: em(14, 16),
+                                // borderRadius: rem(5),
+                                // paddingTop: em(3, 16),
+                                // paddingRight: em(6, 16),
+                                // paddingBottom: em(3, 16),
+                                // paddingLeft: em(6, 16),
+                                // All included in base `<kbd>` styles.
+                                ...pluginTypographyStyles.base.css[0]['kbd'],
+                            },
+                            'mark, mark *': {
+                                fontSize: '.944444em',
+                                color: 'rgb(var(--colors-color-hilite-fg))',
+                                backgroundColor: 'rgb(var(--colors-color-hilite))',
+                            }, // Supports nested `<a>`, `<code>`, `<kdb>`, `*`.
+                            'mark *': { border: '0', padding: '0', boxShadow: 'none' },
+                            'mark a, mark .link': { opacity: '.75', textDecoration: 'underline' },
+                            'mark a:hover, mark .link:hover': { opacity: '1' }, // Opaque on hover.
+
+                            // Task lists produced by remark GFM plugin.
+                            '.contains-task-list, .task-list-item': {
+                                paddingLeft: '.375em',
+                                listStyleType: 'none',
+                            },
+                            '.contains-task-list .contains-task-list': {
+                                margin: '0',
+                                paddingLeft: '1.5em',
+                            },
+                            '.task-list-item::marker': {
+                                content: "''",
+                            },
+                            '.task-list-item > input[type=checkbox]': {
+                                appearance: 'none',
+                                position: 'relative',
+                                display: 'inline-block',
+
+                                width: '1em',
+                                height: '1em',
+                                margin: '0 .5em 0 0',
+                                verticalAlign: 'middle',
+
+                                background: 'rgb(var(--colors-color-neutral))',
+                                border: '1px solid rgb(var(--colors-color-neutral-fg), .25)',
+                                borderRadius: '.15em',
+                            },
+                            '.task-list-item > input[type=checkbox]:checked::before': {
+                                content: "'\\2713'",
+
+                                fontSize: '1em',
+                                lineHeight: '1em',
+                                color: 'rgb(var(--colors-color-neutral-fg))',
+
+                                top: '-.05em',
+                                left: '.1em',
+                                position: 'absolute',
+                            },
+                            // Footnotes produced by remark GFM plugin.
+                            '.footnotes': {
+                                borderTop: '1px solid rgb(var(--colors-color-prose-hr))',
+                                marginTop: '4em',
+                                fontSize: '0.875rem',
+                                lineHeight: '1.25rem',
+                            },
+                            '.footnotes > h2': {
+                                marginTop: '1em',
                             },
                         },
                     },
@@ -131,7 +250,6 @@ export default /* not async compatible */ ({ themesConfig } = {}) => {
         },
         plugins: [
             pluginTypography({ className: 'prose' }), // Implements `prose` class.
-            pluginForms({ strategy: 'class' }), // Implements form classes; e.g., `form-{class}`.
             pluginThemer(mergeThemesConfig({ themesConfig })), // Implements themes configuration.
         ],
         content: [

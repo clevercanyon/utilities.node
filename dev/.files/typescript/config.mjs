@@ -87,8 +87,11 @@ export default async () => {
 
             target: esVersion.lcnYear,
             lib: [esVersion.lcnYear],
-            types: ['vite/client', '@types/mdx', 'unplugin-icons/types/preact'],
-
+            types: [
+                'vite/client', //
+                '@types/mdx',
+                'unplugin-icons/types/preact',
+            ],
             jsx: 'react-jsx',
             jsxImportSource: 'preact',
 
@@ -104,7 +107,8 @@ export default async () => {
 
             paths: relativeImportAliases, // Relative to `baseUrl`.
         },
-        mdx: (await import(path.resolve(projDir, './.remarkrc.mjs'))).default.tsconfigMDX,
+        // This is needed by the VSCode extension for MDX.
+        mdx: (await (await import(path.resolve(projDir, './mdx.config.mjs'))).default()).vsCodeTSConfig,
     };
 
     /**
