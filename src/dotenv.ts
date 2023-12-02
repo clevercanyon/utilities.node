@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import './resources/init.ts';
+import '#@init.ts';
 
 import { $obj, $to, type $type } from '@clevercanyon/utilities';
 import dotenv from 'dotenv';

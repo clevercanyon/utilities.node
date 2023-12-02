@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import './resources/init.ts';
+import '#@init.ts';
 
 import prettier from 'prettier';
 

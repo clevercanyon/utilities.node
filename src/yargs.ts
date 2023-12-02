@@ -2,13 +2,13 @@
  * Utility class.
  */
 
-import './resources/init.ts';
+import '#@init.ts';
 
+import { $chalk } from '#index.ts';
 import { $is, $obj } from '@clevercanyon/utilities';
 import type { Arguments as Args, Argv as Yargs } from 'yargs';
 import yArgs from 'yargs';
 import { hideBin as yArgsꓺhideBin } from 'yargs/helpers';
-import { $chalk } from './index.ts';
 
 /**
  * Defines types.

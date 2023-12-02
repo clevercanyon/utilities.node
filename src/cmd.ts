@@ -2,15 +2,15 @@
  * Utility class.
  */
 
-import './resources/init.ts';
+import '#@init.ts';
 
+import type { Chalk } from '#chalk.ts';
+import { $chalk } from '#index.ts';
 import * as splitCMD from '@clevercanyon/split-cmd.fork';
 import { $obj } from '@clevercanyon/utilities';
 import { execSync } from 'node:child_process';
 import { Shescape as ShEscape } from 'shescape';
 import spawnPlease from 'spawn-please';
-import type { Chalk } from './chalk.ts';
-import { $chalk } from './index.ts';
 
 const stdout = process.stdout.write.bind(process.stdout);
 const stderr = process.stderr.write.bind(process.stderr);
