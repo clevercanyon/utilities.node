@@ -52,18 +52,17 @@ export const parseExpand = (files: string | string[], options?: ParseExpandOptio
     if (!opts.ignoreProcessEnv && opts.preserveProcessEnv) {
         origProcessEnv = { ...process.env };
     }
-    const env = Object.fromEntries(
-        $to.array(files).flatMap((file) => {
-            if (!fs.existsSync(file)) return [];
+    const env = // Parses all, then expands, while considering options.
+        expand({
+            ignoreProcessEnv: opts.ignoreProcessEnv,
+            parsed: Object.fromEntries(
+                $to.array(files).flatMap((file) => {
+                    if (!fs.existsSync(file)) return [];
+                    return Object.entries(parse(fs.readFileSync(file).toString()));
+                }),
+            ),
+        }).parsed || {};
 
-            return Object.entries(
-                expand({
-                    ignoreProcessEnv: opts.ignoreProcessEnv,
-                    parsed: parse(fs.readFileSync(file).toString()),
-                }).parsed || {},
-            );
-        }),
-    );
     if (!opts.ignoreProcessEnv && opts.preserveProcessEnv && origProcessEnv) {
         process.env = origProcessEnv;
     }
