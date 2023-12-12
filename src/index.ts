@@ -2,7 +2,7 @@
  * Utility exports.
  */
 
-import '#@init.ts';
+import '#@initialize.ts';
 
 export * as $chalk from '#chalk.ts';
 export * as $cmd from '#cmd.ts';

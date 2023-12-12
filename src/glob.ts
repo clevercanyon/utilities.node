@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import '#@init.ts';
+import '#@initialize.ts';
 
 import { $obj } from '@clevercanyon/utilities';
 import type { Options as GlobbyOptions } from 'globby';

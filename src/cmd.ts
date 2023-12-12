@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import '#@init.ts';
+import '#@initialize.ts';
 
 import type { Chalk } from '#chalk.ts';
 import { $chalk } from '#index.ts';

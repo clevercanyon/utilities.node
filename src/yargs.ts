@@ -2,7 +2,7 @@
  * Utility class.
  */
 
-import '#@init.ts';
+import '#@initialize.ts';
 
 import { $chalk } from '#index.ts';
 import { $is, $obj } from '@clevercanyon/utilities';
