@@ -62,7 +62,7 @@ export const spawn = async (cmd: string, args: string[] = [], options?: SpawnOpt
     const shell = 'shell' in opts ? opts.shell : bash; // For check below.
 
     if (shell && shell !== bash) {
-        throw new Error(shellWarning); // Because we must match `ShEscape`.
+        throw Error(shellWarning); // Because we must match `ShEscape`.
     }
     if (shell /* When using a shell, we must escape everything ourselves. */) {
         // i.e., Node does not escape `cmd` or `args` when a `shell` is given.
@@ -103,7 +103,7 @@ export const exec = async (cmd: string, options?: ExecOptions): Promise<string> 
     const shell = 'shell' in opts ? opts.shell : bash; // For check below.
 
     if (shell && shell !== bash) {
-        throw new Error(shellWarning); // Because we must match `ShEscape`.
+        throw Error(shellWarning); // Because we must match `ShEscape`.
     }
     return (
         execSync(cmd, {

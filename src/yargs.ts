@@ -72,11 +72,13 @@ export const cli = async (options?: Options): Promise<Yargs> => {
         .strict(opts.strict) // `true` = no arbitrary commands|options.
 
         .fail(async (message, error /* , yargs */) => {
+            // @review Consider using {@see $error.safeMessageFrom()}.
+
             if ($is.error(error) && error.stack && $is.string(error.stack)) {
                 console.error($chalk.gray(error.stack));
             }
             const errorBoxTitle = (opts.errorBoxName ? opts.errorBoxName + ': ' : '') + 'Problem';
-            const errorBoxMessage = $is.error(error) ? error.toString() : message || 'Unexpected unknown errror.';
+            const errorBoxMessage = $is.error(error) ? error.toString() : message || 'Unknown errror code: EwFqTex6.';
 
             console.error($chalk.errorBox(errorBoxTitle, errorBoxMessage));
             process.exit(1); // Stop here.
