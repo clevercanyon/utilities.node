@@ -3,7 +3,7 @@
     "publishConfig": {
         "access": "public"
     },
-    "version": "1.0.149",
+    "version": "1.0.150",
     "license": "GPL-3.0-or-later",
     "name": "@clevercanyon/utilities.node",
     "description": "Utilities for JavaScript apps running in a Node environment.",
@@ -79,8 +79,8 @@
     },
     "dependencies": {},
     "peerDependencies": {
-        "@clevercanyon/split-cmd.fork": "^1.0.88",
-        "@clevercanyon/utilities": "^1.0.673",
+        "@clevercanyon/split-cmd.fork": "^1.0.89",
+        "@clevercanyon/utilities": "^1.0.679",
         "archiver": "6.0.1",
         "boxen": "7.1.1",
         "chalk": "5.3.0",
@@ -91,7 +91,7 @@
         "globby": "14.0.0",
         "prettier": "3.1.0",
         "shescape": "2.0.2",
-        "spawn-please": "npm:@clevercanyon/spawn-please.fork@^2.0.82",
+        "spawn-please": "npm:@clevercanyon/spawn-please.fork@^2.0.83",
         "term-img": "6.0.0",
         "yargs": "17.7.2",
         "yargs-parser": "21.1.1"
@@ -100,7 +100,7 @@
     "optionalDependencies": {},
     "bundleDependencies": [],
     "devDependencies": {
-        "@clevercanyon/dev-deps": "^1.0.315"
+        "@clevercanyon/dev-deps": "^1.0.316"
     },
     "overrides": {},
     "cpu": ["x64", "arm64"],
