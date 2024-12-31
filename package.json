@@ -3,7 +3,7 @@
     "publishConfig": {
         "access": "public"
     },
-    "version": "1.0.216",
+    "version": "1.0.217",
     "license": "GPL-3.0-or-later",
     "name": "@clevercanyon/utilities.node",
     "description": "Utilities for JavaScript apps running in a Node environment.",
@@ -55,6 +55,11 @@
             "import": "./dist/glob.js",
             "default": "./dist/glob.js"
         },
+        "./mailer": {
+            "types": "./dist/types/mailer.d.ts",
+            "import": "./dist/mailer.js",
+            "default": "./dist/mailer.js"
+        },
         "./prettier": {
             "types": "./dist/types/prettier.d.ts",
             "import": "./dist/prettier.js",
@@ -85,7 +90,7 @@
     "dependencies": {},
     "peerDependencies": {
         "@clevercanyon/split-cmd.fork": "^1.0.147",
-        "@clevercanyon/utilities": "^1.0.969",
+        "@clevercanyon/utilities": "^1.0.970",
         "@upstash/ratelimit": "1.1.1",
         "@upstash/redis": "1.34.3",
         "archiver": "6.0.1",
@@ -96,6 +101,7 @@
         "dotenv-vault": "1.25.0",
         "find-up": "7.0.0",
         "globby": "14.0.0",
+        "nodemailer": "^6.9.16",
         "prettier": "3.1.0",
         "shescape": "2.0.2",
         "spawn-please": "npm:@clevercanyon/spawn-please.fork@^2.0.141",
@@ -107,7 +113,7 @@
     "optionalDependencies": {},
     "bundleDependencies": [],
     "devDependencies": {
-        "@clevercanyon/dev-deps": "^1.0.385"
+        "@clevercanyon/dev-deps": "^1.0.386"
     },
     "overrides": {},
     "cpu": ["x64", "arm64"],

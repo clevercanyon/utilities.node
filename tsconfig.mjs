@@ -34,6 +34,7 @@ export default await (async () => {
                     '@types/node', //
                     '@types/yargs',
                     '@types/archiver',
+                    '@types/nodemailer',
                     '@types/yargs-parser',
                 ],
             },
