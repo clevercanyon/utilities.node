@@ -59,6 +59,10 @@ export default async () => {
         compatibility_date: settings.compatibilityDate,
         compatibility_flags: settings.compatibilityFlags,
 
+        // Dev env, for any tests run locally.
+
+        env: { dev: {} }, // It just needs to exist.
+
         // The rest of these settings are applied conditionally.
 
         ...(['cma', 'spa', 'mpa'].includes(appType) && ['cfw', 'cfp'].includes(targetEnv)
@@ -70,22 +74,71 @@ export default async () => {
                         }
                       : // Cloudflare worker configuration.
                         {
-                            // Worker account ID.
-                            account_id: settings.defaultAccountId,
-
-                            // Enables logpush for worker trace events.
-                            logpush: settings.defaultLogpush, // Requires paid plan.
-
-                            // Sets a default upper limit on CPU time.
-                            limits: { cpu_ms: $time.secondInMilliseconds * 5 },
-
                             // Worker name.
                             name: settings.defaultWorkerName,
 
-                            // App main entry configuration.
+                            // Worker account ID.
+                            account_id: settings.defaultAccountId,
+
+                            // Worker logpush for trace events.
+                            logpush: settings.defaultLogpush, // Requires paid plan.
+
+                            // Worker upper limit on CPU time.
+                            limits: { cpu_ms: $time.secondInMilliseconds * 5 },
+
+                            // Worker main entry file path.
                             main: './' + path.relative(projDir, './dist/index.js'),
 
-                            // Bundling configuration; {@see <https://o5p.me/JRHxfC>}.
+                            // Worker custom build configuration.
+                            build: {
+                                cwd: './' + path.relative(projDir, './'),
+                                watch_dir: './' + path.relative(projDir, './src'),
+                                command: 'npx @clevercanyon/madrun build --mode=prod',
+                            },
+                            // Worker `$ madrun wrangler dev` settings.
+                            dev: {
+                                local_protocol: settings.defaultLocalProtocol,
+                                ip: settings.defaultLocalIP, // e.g., `0.0.0.0`.
+                                port: Number(settings.defaultLocalPort),
+                            },
+                            // Worker subdomains; i.e., `*.workers.dev`.
+
+                            workers_dev: false, // We don’t typically use this.
+                            preview_urls: false, // We don’t typically use.
+
+                            // Worker default route.
+                            route: {
+                                zone_name: settings.defaultWorkerZoneName,
+                                pattern: settings.defaultWorkersDomain + '/' + settings.defaultWorkerShortName + '/*',
+                            },
+                            // Worker environments.
+                            env: {
+                                // `$ madrun wrangler dev` environment, for local testing.
+                                dev: {
+                                    route: {
+                                        zone_name: settings.defaultLocalHostname,
+                                        pattern: settings.defaultLocalHostname + '/' + settings.defaultWorkerShortName + '/*',
+                                    },
+                                    build: {
+                                        cwd: './' + path.relative(projDir, './'),
+                                        watch_dir: './' + path.relative(projDir, './src'),
+                                        command: 'VITE_WRANGLER_MODE=dev npx @clevercanyon/madrun build --mode=dev',
+                                    },
+                                },
+                                // `$ madrun wrangler deploy --env=stage`.
+                                stage: {
+                                    route: {
+                                        zone_name: settings.defaultWorkerZoneName,
+                                        pattern: settings.defaultWorkersDomain + '/' + settings.defaultWorkerStageShortName + '/*',
+                                    },
+                                    build: {
+                                        cwd: './' + path.relative(projDir, './'),
+                                        watch_dir: './' + path.relative(projDir, './src'),
+                                        command: 'npx @clevercanyon/madrun build --mode=stage',
+                                    },
+                                },
+                            },
+                            // Worker bundling rules; {@see <https://o5p.me/JRHxfC>}.
                             rules: [
                                 {
                                     type: 'ESModule',
@@ -107,6 +160,13 @@ export default async () => {
                                     fallthrough: false,
                                 },
                                 {
+                                    type: 'CompiledWasm', //
+                                    globs: extensions.asNoBraceGlobstars([
+                                        ...extensions.byCanonical.wasm, //
+                                    ]),
+                                    fallthrough: false,
+                                },
+                                {
                                     type: 'Text',
                                     globs: extensions.asNoBraceGlobstars(
                                         [...extensions.byVSCodeLang.codeTextual].filter(
@@ -122,6 +182,7 @@ export default async () => {
                                                     ...extensions.byDevGroup.cJavaScriptReact,
 
                                                     ...extensions.byCanonical.wasm,
+
                                                     ...extensions.byDevGroup.allTypeScript,
                                                     // Omit TypeScript also, because it causes Wrangler to choke. Apparently, Wrangler’s build system incorporates TypeScript middleware files.
                                                     // Therefore, we omit all TypeScript such that Wrangler’s build system can add TS files without them inadvertently being classified as text by our rules.
@@ -147,64 +208,14 @@ export default async () => {
                                                     ...extensions.byDevGroup.cJavaScriptReact,
 
                                                     ...extensions.byCanonical.wasm,
+
                                                     ...extensions.byDevGroup.allTypeScript,
                                                 ].includes(ext),
                                         ),
                                     ),
                                     fallthrough: false,
                                 },
-                                { type: 'CompiledWasm', globs: extensions.asNoBraceGlobstars([...extensions.byCanonical.wasm]), fallthrough: false },
                             ],
-
-                            // Custom build configuration.
-                            build: {
-                                cwd: './' + path.relative(projDir, './'),
-                                watch_dir: './' + path.relative(projDir, './src'),
-                                command: 'npx @clevercanyon/madrun build --mode=prod',
-                            },
-
-                            // Route configuration.
-                            route: {
-                                zone_name: settings.defaultWorkerZoneName,
-                                pattern: settings.defaultWorkersDomain + '/' + settings.defaultWorkerShortName + '/*',
-                            },
-
-                            // `$ madrun wrangler dev` settings.
-                            dev: {
-                                local_protocol: settings.defaultLocalProtocol,
-                                ip: settings.defaultLocalIP, // e.g., `0.0.0.0`.
-                                port: Number(settings.defaultLocalPort),
-                            },
-
-                            // Environments used by this worker.
-                            workers_dev: false, // We don’t use `*workers.dev`.
-                            env: {
-                                // `$ madrun wrangler dev` environment, for local testing.
-                                dev: {
-                                    route: {
-                                        zone_name: settings.defaultLocalHostname,
-                                        pattern: settings.defaultLocalHostname + '/' + settings.defaultWorkerShortName + '/*',
-                                    },
-                                    vars: settings.miniflareEnvVarAsObject,
-                                    build: {
-                                        cwd: './' + path.relative(projDir, './'),
-                                        watch_dir: './' + path.relative(projDir, './src'),
-                                        command: 'VITE_WRANGLER_MODE=dev npx @clevercanyon/madrun build --mode=dev',
-                                    },
-                                },
-                                // `$ madrun wrangler deploy --env=stage`.
-                                stage: {
-                                    route: {
-                                        zone_name: settings.defaultWorkerZoneName,
-                                        pattern: settings.defaultWorkersDomain + '/' + settings.defaultWorkerStageShortName + '/*',
-                                    },
-                                    build: {
-                                        cwd: './' + path.relative(projDir, './'),
-                                        watch_dir: './' + path.relative(projDir, './src'),
-                                        command: 'npx @clevercanyon/madrun build --mode=stage',
-                                    },
-                                },
-                            },
                         }),
               }
             : {}),
