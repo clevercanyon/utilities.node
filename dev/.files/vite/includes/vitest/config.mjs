@@ -293,7 +293,17 @@ export default async ({ mode, projDir, srcDir, logsDir, pkg, targetEnv, vitestSa
                                     $concat: {
                                         include: [
                                             '@clevercanyon/utilities', //
-                                        ].filter((name) => name !== pkg.name),
+                                            '@clevercanyon/utilities/**',
+
+                                            '@clevercanyon/utilities.web',
+                                            '@clevercanyon/utilities.web/**',
+
+                                            '@clevercanyon/utilities.cfw',
+                                            '@clevercanyon/utilities.cfw/**',
+
+                                            '@clevercanyon/utilities.cfp',
+                                            '@clevercanyon/utilities.cfp/**',
+                                        ].filter((name) => name !== pkg.name && !name.startsWith(pkg.name + '/')),
                                     },
                                 }),
                             },

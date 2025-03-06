@@ -71,14 +71,15 @@ export const instance = $fn.memo(
     },
     (options?: InstanceOptions): Redis => {
         const opts = $obj.defaults({}, options || {}, {
-            restURL: $env.get('SSR_APP_UPSTASH_REDIS_REST_URL', { type: 'string' }) || $env.get('APP_UPSTASH_REDIS_REST_URL', { type: 'string' }),
-            restToken: $env.get('SSR_APP_UPSTASH_REDIS_REST_TOKEN', { type: 'string' }) || $env.get('APP_UPSTASH_REDIS_REST_TOKEN', { type: 'string' }),
-            maxConcurrentConnections:
-                $env.get('SSR_APP_UPSTASH_REDIS_MAX_CONCURRENT_CONNECTIONS', { type: 'number' }) || //
-                $env.get('APP_UPSTASH_REDIS_MAX_CONCURRENT_CONNECTIONS', { type: 'number' }) ||
-                100, // The Upstash free plan via Digital Ocean allows up to 100 concurrent connections.
+            restURL: $env.get('APP_UPSTASH_REDIS_REST_URL', { type: 'string' }),
+            restToken: $env.get('APP_UPSTASH_REDIS_REST_TOKEN', { type: 'string' }),
+            maxConcurrentConnections: $env.get('APP_UPSTASH_REDIS_MAX_CONCURRENT_CONNECTIONS', { type: 'number' }) || 100,
+            // The Upstash free plan via Digital Ocean allows up to 100 concurrent connections.
         }) as Required<InstanceOptions>;
 
+        if (!opts.restURL || !opts.restToken) {
+            throw Error('3C28Cxf6'); // Missing options.
+        }
         // Constructor always reads env variable for this specific setting.
         process.env.UPSTASH_DISABLE_TELEMETRY ??= '1'; // Don’t report back to Upstash.
 
@@ -172,12 +173,10 @@ const rateLimiterCore = $fn.memo(
     },
     (options?: RateLimiterOptions): RateLimiterCore => {
         const instanceOpts = $obj.defaults({}, $obj.pick(options || {}, instanceOptionKeys), {
-                restURL: $env.get('SSR_APP_UPSTASH_RATE_LIMIT_REDIS_REST_URL', { type: 'string' }) || $env.get('APP_UPSTASH_RATE_LIMIT_REDIS_REST_URL', { type: 'string' }),
-                restToken: $env.get('SSR_APP_UPSTASH_RATE_LIMIT_REDIS_REST_TOKEN', { type: 'string' }) || $env.get('APP_UPSTASH_RATE_LIMIT_REDIS_REST_TOKEN', { type: 'string' }),
-                maxConcurrentConnections:
-                    $env.get('SSR_APP_UPSTASH_RATE_LIMIT_REDIS_MAX_CONCURRENT_CONNECTIONS', { type: 'number' }) || //
-                    $env.get('APP_UPSTASH_RATE_LIMIT_REDIS_MAX_CONCURRENT_CONNECTIONS', { type: 'number' }) ||
-                    100, // The Upstash free plan via Digital Ocean allows up to 100 concurrent connections.
+                restURL: $env.get('APP_UPSTASH_RATE_LIMIT_REDIS_REST_URL', { type: 'string' }),
+                restToken: $env.get('APP_UPSTASH_RATE_LIMIT_REDIS_REST_TOKEN', { type: 'string' }),
+                maxConcurrentConnections: $env.get('APP_UPSTASH_RATE_LIMIT_REDIS_MAX_CONCURRENT_CONNECTIONS', { type: 'number' }) || 100,
+                // The Upstash free plan via Digital Ocean allows up to 100 concurrent connections.
             }) as unknown as Required<InstanceOptions>,
             //
             opts = $obj.defaults({}, $obj.omit(options || {}, instanceOptionKeys), {
@@ -189,6 +188,9 @@ const rateLimiterCore = $fn.memo(
                 timeout: 0, // If network issues arise, we allow requests in after this delay, when greater than `0`.
             }) as unknown as Required<Omit<RateLimiterOptions, keyof InstanceOptions>>;
 
+        if (!instanceOpts.restURL || !instanceOpts.restToken) {
+            throw Error('PFFPsRXy'); // Missing options.
+        }
         if (!opts.prefix /* Automatic key prefix using sliding window. */) {
             opts.prefix = 'rate-limit:' + String(opts.slidingWindow[0]) + ':' + opts.slidingWindow[1];
         }
