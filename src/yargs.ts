@@ -136,7 +136,7 @@ const yArgsꓺwithBracketedArrays = async (): Promise<Yargs> => {
                     continue; // Not applicable.
                 }
                 if ($is.array(args[name])) {
-                    args[name] = (args[name] as (string | number)[]) //
+                    args[name] = args[name] //
                         .map((v) => (typeof v === 'string' ? v.replace(/,$/u, '') : v))
                         .filter((v) => '' !== v);
                 }
